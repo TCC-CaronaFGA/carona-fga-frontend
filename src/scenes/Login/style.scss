@@ -1,0 +1,25 @@
+@import "../../shared/style/variables";
+@import "../../shared/style/typography";
+@import "../../shared/style/buttons";
+
+.section {
+	background-color: $ebony;
+	
+	.login {
+		height: 100vh;
+		//width: 30%;		
+
+		h1 {
+			text-align: center;
+			padding-top: 10%;
+			padding-bottom: 32px;
+		}
+
+		.ant-input {
+			border-radius: 50px;
+		}
+
+		
+	}
+}
+

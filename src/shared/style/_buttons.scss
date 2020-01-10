@@ -1,0 +1,11 @@
+.ant-btn {
+	width: 100%;
+	border-radius: 50px !important;
+	background-color: $gigas !important;
+	border-color: $gigas !important;
+	
+	&:hover {
+		background-color: $comet !important;
+		border-color: $comet !important;
+	}
+}
