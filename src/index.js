@@ -1,8 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Inicio from "./scenes/Inicio";
-import Login from "./scenes/Login";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import RootRoutes from "./components/Routes";
 
 class App extends React.Component {
   render() {
@@ -12,14 +10,7 @@ class App extends React.Component {
 
 class Componente extends React.Component {
   render() {
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route path="/" exact={true} component={Inicio} />
-          <Route path="/login" component={Login} />
-        </Switch>
-      </BrowserRouter>
-    );
+    return <RootRoutes />;
   }
 }
 
