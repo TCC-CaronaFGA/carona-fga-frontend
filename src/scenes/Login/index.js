@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Form, Icon, Input, Button, Row, Col } from "antd";
 import "./style.scss";
-import "antd/dist/antd.css";
 
 class Login extends Component {
   handleSubmit = e => {
@@ -47,7 +46,7 @@ class Login extends Component {
                     htmlType="submit"
                     className="login-form-button"
                   >
-                    entrar
+                    ENTRAR
                   </Button>
                 </Form.Item>
               </Form>

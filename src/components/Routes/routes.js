@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import Login from "../../scenes/Login";
 import Home from "../../scenes/Home";
+import RideForm from "../../scenes/RideForm";
 
 //Data Imports
 
 class Routes extends Component {
   MenuItems = [
     { path: "/login", component: props => <Login {...props} /> },
-    { path: "/login2", component: props => <Login {...props} /> }
+    { path: "/create-ride", component: props => <RideForm {...props} /> }
   ];
   render() {
     return (

@@ -1,0 +1,36 @@
+@import "../../shared/LayoutApp/styles.scss";
+
+.section {
+  margin: 32px auto;
+  width: 50%;
+  background-color: $alto;
+  border-radius: 4px;
+  padding: 12px;
+}
+
+h1, .ant-form-item-label > label {
+  color: $ebony !important;
+}
+
+.ant-form {
+  padding: 16px;
+}
+
+.ant-form-item:not(:last-child){
+  margin-bottom: 12px;
+}
+
+.ant-select-selection, .ant-input {
+  border: none;
+  border-bottom: 1px solid $martinique;
+  background-color: $alto;
+  border-radius: 0;
+
+  .ant-select-selection__placeholder {
+    color: #9E9E9E;
+  }
+
+  .anticon {
+    color: $martinique;
+  }
+}
