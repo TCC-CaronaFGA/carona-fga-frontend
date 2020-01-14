@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, Icon, Input, Button, Row, Col } from "antd";
-import "./style.scss";
+import "./styles.scss";
 
 class Login extends Component {
   handleSubmit = e => {
@@ -17,7 +17,9 @@ class Login extends Component {
       <div className="section">
         <div className="login">
           <header className="login-header">
-            <h1 className="login-title">CaronaFGA</h1>
+            <h1 className="login-title">
+              Carona<b>FGA</b>
+            </h1>
           </header>
           <Row>
             <Col span={8}></Col>

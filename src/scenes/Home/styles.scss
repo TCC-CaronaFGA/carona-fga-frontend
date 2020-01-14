@@ -1,0 +1,13 @@
+@import "../../shared/LayoutApp/styles.scss";
+
+.body {
+	background-color: $ebony;
+}
+
+.ant-layout-header {
+	height: 56px !important;
+	padding: 0 50px;
+	line-height: 56px;
+	background: $gigas !important;
+
+}

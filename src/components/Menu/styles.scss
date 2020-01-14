@@ -1,0 +1,32 @@
+@import "../../shared/LayoutApp/styles.scss";
+
+.ant-menu {
+  background: $gigas;
+}
+
+.ant-menu-horizontal {
+  border: none;
+}
+
+.ant-menu-horizontal > .ant-menu-item,
+.ant-menu-horizontal > .ant-menu-item > a {
+  color: $alto;
+  margin-top: -2px;
+  font-size: 16px;
+}
+
+.ant-menu-horizontal > .ant-menu-item:hover,
+.ant-menu-horizontal > .ant-menu-item > a:hover {
+  color: $alto;
+}
+
+.ant-menu-item .anticon {
+  font-size: 16px;
+}
+
+.ant-menu-horizontal > .ant-menu-item,
+.ant-menu-horizontal > .ant-menu-item:hover,
+.ant-menu-horizontal > .ant-menu-item-selected {
+  border-bottom: 1px solid $gigas;
+  top: 0;
+}

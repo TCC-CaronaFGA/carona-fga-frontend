@@ -1,6 +1,6 @@
 @import "../../shared/LayoutApp/styles.scss";
 
-.section {
+.content {
   margin: 32px auto;
   width: 50%;
   background-color: $alto;
@@ -20,7 +20,7 @@ h1, .ant-form-item-label > label {
   margin-bottom: 12px;
 }
 
-.ant-select-selection, .ant-input {
+.ant-select-selection, .ant-input, .ant-time-picker-input {
   border: none;
   border-bottom: 1px solid $martinique;
   background-color: $alto;
@@ -33,4 +33,9 @@ h1, .ant-form-item-label > label {
   .anticon {
     color: $martinique;
   }
+
+}
+
+.ant-switch-checked {
+  background-color: $gigas;
 }

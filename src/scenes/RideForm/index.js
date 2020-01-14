@@ -57,7 +57,7 @@ class RideForm extends Component {
     const format = "HH:mm";
     return (
       <>
-        <div className="section">
+        <div className="content">
           <Row gutter={24}>
             <Col span={20}>
               <h1>Oferecer carona</h1>
@@ -95,6 +95,7 @@ class RideForm extends Component {
               <Col span={8}>
                 <Form.Item label="Data">
                   <DatePicker
+                    placeholder="Selecione a data"
                     format="DD-MM-YYYY"
                     dateRender={current => {
                       const style = {};
