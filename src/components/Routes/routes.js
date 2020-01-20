@@ -3,13 +3,15 @@ import { Route, Switch } from "react-router-dom";
 import Login from "../../scenes/Login";
 import Home from "../../scenes/Home";
 import RideForm from "../../scenes/RideForm";
+import RideList from "../../scenes/RideList";
 
 //Data Imports
 
 class Routes extends Component {
   MenuItems = [
     { path: "/login", component: props => <Login {...props} /> },
-    { path: "/create-ride", component: props => <RideForm {...props} /> }
+    { path: "/create-ride", component: props => <RideForm {...props} /> },
+    { path: "/search-ride", component: props => <RideList {...props} /> }
   ];
   render() {
     return (

@@ -20,22 +20,26 @@ h1, .ant-form-item-label > label {
   margin-bottom: 12px;
 }
 
-.ant-select-selection, .ant-input, .ant-time-picker-input {
+.ant-select-selection, .ant-input, .ant-time-picker-input, .ant-input:hover {
   border: none;
-  border-bottom: 1px solid $martinique;
+  border-bottom: 1px solid $ebony;
   background-color: $alto;
   border-radius: 0;
 
   .ant-select-selection__placeholder {
-    color: #9E9E9E;
+    color: $placeholder;
   }
 
   .anticon {
-    color: $martinique;
+    color: $ebony;
   }
 
 }
 
 .ant-switch-checked {
   background-color: $gigas;
+}
+
+.ant-select-selection:hover {
+  border-color: $gigas;
 }

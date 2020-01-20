@@ -14,7 +14,7 @@ class Navigation extends Component {
           style={{ lineHeight: "56px", float: "right" }}
         >
           <Menu.Item key="1">
-            <Link to="/">
+            <Link to="/search-ride">
               <Icon type="search" />
               Procurar
             </Link>
