@@ -1,0 +1,18 @@
+@import "../../shared/LayoutApp/styles.scss";
+
+h4, h5 {
+  color: $alto;
+}
+
+.vagas-disponiveis {
+  border: 1px solid $alert;
+  padding: 12px;
+  margin: 32px 24px 0 0 ;
+  text-align: center;
+}
+
+.anticon-car {
+  font-size: 26px;
+  padding: 54px 24px;
+  color: $alto;
+}
