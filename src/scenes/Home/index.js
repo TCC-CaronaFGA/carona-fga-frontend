@@ -1,17 +1,24 @@
 import React, { Component } from "react";
 import "./styles.scss";
+import { Spin } from "antd";
 
 class Home extends Component {
   render() {
+    const { Consumer } = this.props;
     return (
-      <>
-        <div className="App">
-          {/* <header className="App-header">
-            <h1 className="App-title">Welcome to React</h1>
-          </header>
-          <p className="App-intro">Texto</p> */}
-        </div>
-      </>
+      <Consumer>
+        {value =>
+          <div className="App">
+            {(value.auth.user == null) ? (
+              <div className="spin">
+                <Spin tip="Carregando..." />
+              </div>
+            ) : (
+              <p>"Bem vindo {value.auth.user.name}"</p>
+              )}
+          </div>
+        }
+      </Consumer>
     );
   }
 }
