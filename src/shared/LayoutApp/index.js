@@ -3,9 +3,9 @@ import { Layout } from "antd";
 import "./styles.scss";
 import Navigation from "../../components/Menu";
 import { setupInterceptors } from "../../auth/SetupInterceptors";
-import axios from 'axios';
-import { authStatusRoute } from "../../constants/routes";
 import { history } from "../../components/Routes";
+import { checkLogin } from "./_/actions";
+import {connect} from "react-redux";
 
 setupInterceptors();
 class LayoutApp extends Component {
@@ -15,16 +15,16 @@ class LayoutApp extends Component {
       user: {}
     }
     const token = localStorage.getItem("auth_token");
-    if(token != null)
-      axios.get(authStatusRoute).then(response => {
-        if(response.status === 200){
-          this.setState({user: response.data});
-        }
-        else{
-          history.push("/");
-        }
-      });
-    else{
+    if(token != null){
+      this.props.checkLogin(this.loginCallback.bind(this));
+    }
+    else {
+      this.loginCallback(false);
+    }
+  }
+
+  loginCallback(didLogin){
+    if(!didLogin){
       history.push("/login");
     }
   }
@@ -43,5 +43,5 @@ class LayoutApp extends Component {
     );
   }
 }
-
-export default LayoutApp;
+    
+  export default connect(null,{checkLogin})(LayoutApp);

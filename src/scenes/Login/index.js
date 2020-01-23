@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Form, Icon, Input, Button, Row } from "antd";
 import "./styles.scss";
 import { setupInterceptors } from "../../auth/SetupInterceptors";
+import {connect} from "react-redux";
+import { login } from "../../shared/LayoutApp/_/actions";
+import { history } from "../../components/Routes";
 
 setupInterceptors();
 class Login extends Component {
@@ -10,10 +13,19 @@ class Login extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.setState({loading: true});
-        this.props.auth.login(values);
+        this.props.login(values, this.loginCallback.bind(this));
       }
     });
   };
+
+  loginCallback(didLogin){
+    if(didLogin){
+      history.push('/');
+    }
+    else{
+      this.setState({loading: false});
+    }
+  }
 
   constructor(props){
     super(props)
@@ -71,4 +83,4 @@ class Login extends Component {
     );
   }
 }
-export default Form.create({name: 'loginForm'})(Login);
+export default connect(null, {login})(Form.create({name: 'loginForm'})(Login));
