@@ -4,21 +4,22 @@ import Login from "../../scenes/Login";
 import Home from "../../scenes/Home";
 import RideForm from "../../scenes/RideForm";
 import RideList from "../../scenes/RideList";
-import LayoutApp from "../../shared/LayoutApp";
+import Logout from "../../scenes/Logout";
 
 //Data Imports
 
 class Routes extends Component {
   MenuItems = [
     { path: "/login", component: props => <Login {...props} /> },
-    { path: "/create-ride", component: props => <LayoutApp{...props} ><RideForm Consumer = {this.props.Consumer} /></LayoutApp> },
-    { path: "/search-ride", component: props => <LayoutApp{...props} ><RideList Consumer = {this.props.Consumer}/></LayoutApp> }
+    { path: "/logout", component: props => <Logout {...props} /> },
+    { path: "/create-ride", component: props => <RideForm {...props} /> },
+    { path: "/search-ride", component: props => <RideList {...props} /> }
   ];
   render() {
     return (
       <>
         <Switch>
-          <Route exact={true} path="/" component={props => <LayoutApp{...props} ><Home Consumer = {this.props.Consumer}/></LayoutApp>} />
+          <Route exact={true} path="/" component={props => <Home {...props} /> } />
           {this.MenuItems.map((route, i) => {
             return (
               <Route

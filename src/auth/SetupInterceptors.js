@@ -26,14 +26,16 @@ export const setupInterceptors = () => {
       if (response.data["auth_token"]) {
         persistAuthHeadersInDeviceStorage(response.data);
       }
-
+      if (response.data["message"] === "Successfully logged out."){
+        localStorage.removeItem("auth_token");
+      }
       return response;
     },
     function (error) {
       // Do something with response error
       if (error.response) {
-        if (
-          error.response.status === 401) {
+        if (error.response.status === 401) {
+          localStorage.removeItem("auth_token");
           onUnauthenticated();
         }
       }

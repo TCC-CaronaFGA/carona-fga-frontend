@@ -4,10 +4,25 @@ import "./styles.scss";
 import { setupInterceptors } from "../../auth/SetupInterceptors";
 import {connect} from "react-redux";
 import { login } from "../../shared/LayoutApp/_/actions";
-import { history } from "../../components/Routes";
+import { Redirect } from "react-router-dom";
 
 setupInterceptors();
 class Login extends Component {
+  constructor(props){
+    super(props);
+    this.state = {loading: true, redirect: false};
+  }
+
+  componentDidMount(){
+    const token = localStorage.getItem("auth_token");
+    if(token != null){
+      this.props.checkLogin(this.loginCallback.bind(this));
+    }
+    else {
+      this.loginCallback(false);
+    }
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -20,27 +35,18 @@ class Login extends Component {
 
   loginCallback(didLogin){
     if(didLogin){
-      history.push('/');
+      this.setState({redirect: true})
     }
     else{
       this.setState({loading: false});
     }
   }
 
-  constructor(props){
-    super(props)
-    this.state = {
-      loading: false
-    }
-  }
-
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { Consumer } = React.createContext({auth: null});
     return (
-      <Consumer>
-        {value =>
       <div className="section">
+        {this.state.redirect && <Redirect to = "/" />}
         <div className="login">
           <h1 className="login-title">
             Cadrona<b>FGA</b>
@@ -79,8 +85,8 @@ class Login extends Component {
             </Form>
           </Row>
         </div>
-      </div>}</Consumer>
+      </div>
     );
   }
 }
-export default connect(null, {login})(Form.create({name: 'loginForm'})(Login));
+export default Form.create({name: 'loginForm'})(connect(null, {login})(Login));

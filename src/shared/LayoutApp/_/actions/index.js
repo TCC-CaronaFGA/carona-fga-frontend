@@ -1,7 +1,7 @@
 import { setupInterceptors } from "../../../../auth/SetupInterceptors";
 import Axios from "axios";
-import { loginRoute, authStatusRoute } from "../../../../constants/apiRoutes";
-import { FETCH_USER } from "./types";
+import { loginRoute, authStatusRoute, logoutRoute } from "../../../../constants/apiRoutes";
+import { FETCH_USER, LOGOUT_USER } from "./types";
 
 setupInterceptors();
 
@@ -9,12 +9,25 @@ export function login(values, callback) {
   return dispatch => {
     Axios.post(loginRoute, values).then((response) => {
         if(response.status === 200){
-            dispatch({type: FETCH_USER, payload: response.data});
+            dispatch({type: FETCH_USER, payload: response.data.data});
             callback(true);
         }
       })
-      .catch(error => {
+      .catch(() => {
             callback(false);
+    });
+  };
+}
+
+export function logout(callback) {
+  return dispatch => {
+    Axios.get(logoutRoute).then((response) => {
+      if(response.status === 200){
+        dispatch({type: LOGOUT_USER});
+      }
+      callback(); 
+    }).catch(() => {
+      callback();
     });
   };
 }
@@ -24,7 +37,7 @@ export function checkLogin(callback) {
 
     Axios.get(authStatusRoute).then(response => {
         if(response.status === 200){
-            dispatch({type: FETCH_USER, payload: response.data});
+            dispatch({type: FETCH_USER, payload: response.data.data});
             callback(true);
         }
         else{
