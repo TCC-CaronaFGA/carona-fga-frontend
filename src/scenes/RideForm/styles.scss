@@ -43,3 +43,7 @@ h1, .ant-form-item-label > label {
 .ant-select-selection:hover {
   border-color: $gigas;
 }
+
+.ant-select-selection {
+	border-radius: 0 !important;
+}

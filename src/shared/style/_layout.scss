@@ -1,5 +1,31 @@
 .ant-layout {
-	background-color: #C4C4C4;
+	background-color: $ebony;
 	height: 100vh;
 	overflow: hidden;
+	background: url(../../shared/images/background.png);
+	background-repeat: no-repeat;
+	background-size: cover;	
+	height: 100vh;
+	//width: 30%;		
+	display: flex;
+	justify-content: center;
+
+	.content {
+		background-color: $ebony;
+		border-radius: 20px;
+		
+		h1 {
+			text-align: center;
+			padding-top: 10%;
+			padding-bottom: 32px;
+			color: $alto !important;
+		}
+	}
+
+	.section {
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 }

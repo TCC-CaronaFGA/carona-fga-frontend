@@ -15,17 +15,17 @@ class LayoutApp extends Component {
   }
 
   componentDidMount(){
-    const token = localStorage.getItem("auth_token");
+    /*const token = localStorage.getItem("auth_token");
     if(token != null){
       this.props.checkLogin(this.loginCallback.bind(this));
     }
     else {
       this.loginCallback(false);
-    }
+    }*/
   }
 
   componentDidUpdate(oldProps){
-    if(JSON.stringify(this.props.user) !== JSON.stringify(oldProps.user)){
+    /*if(JSON.stringify(this.props.user) !== JSON.stringify(oldProps.user)){
       const token = localStorage.getItem("auth_token");
       if(token != null){
         this.props.checkLogin(this.loginCallback.bind(this));
@@ -33,7 +33,7 @@ class LayoutApp extends Component {
       else {
         this.loginCallback(false);
       }
-    }
+    }*/
   }
 
   loginCallback(didLogin){

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Form, Icon, Input, Button, Row } from "antd";
-import "./styles.scss";
 import { setupInterceptors } from "../../auth/SetupInterceptors";
 import {connect} from "react-redux";
 import { login } from "../../shared/LayoutApp/_/actions";
 import { Redirect } from "react-router-dom";
+import "./styles.scss";
 
 setupInterceptors();
 class Login extends Component {
@@ -49,7 +49,7 @@ class Login extends Component {
         {this.state.redirect && <Redirect to = "/" />}
         <div className="login">
           <h1 className="login-title">
-            Cadrona<b>FGA</b>
+            Carona<b>FGA</b>
           </h1>
           <Row>
             <Form onSubmit={this.handleSubmit} className="login-form">
@@ -76,8 +76,8 @@ class Login extends Component {
                 <Button
                   type="primary"
                   htmlType="submit"
-                  className="login-form-button"
                   loading={this.state.loading}
+                  className="btn-form"
                 >
                   ENTRAR
                 </Button>

@@ -5,6 +5,8 @@ import Home from "../../scenes/Home";
 import RideForm from "../../scenes/RideForm";
 import RideList from "../../scenes/RideList";
 import Logout from "../../scenes/Logout";
+import Register from "../../scenes/Register";
+import CarForm from "../../scenes/CarForm";
 
 //Data Imports
 
@@ -13,7 +15,9 @@ class Routes extends Component {
     { path: "/login", component: props => <Login {...props} /> },
     { path: "/logout", component: props => <Logout {...props} /> },
     { path: "/create-ride", component: props => <RideForm {...props} /> },
-    { path: "/search-ride", component: props => <RideList {...props} /> }
+    { path: "/create-car", component: props => <CarForm {...props} /> },
+    { path: "/search-ride", component: props => <RideList {...props} /> },
+    { path: "/register", component: props => <Register {...props} /> }
   ];
   render() {
     return (

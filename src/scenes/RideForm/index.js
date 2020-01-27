@@ -135,7 +135,6 @@ class RideForm extends Component {
               <Button
                 type="primary"
                 htmlType="submit"
-                className="login-form-button"
               >
                 OFERECER CARONA
               </Button>

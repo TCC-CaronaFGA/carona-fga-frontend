@@ -44,6 +44,11 @@ class Navigation extends Component {
               defaultSelectedKeys={["2"]}
               style={{ lineHeight: "56px", float: "right" }}
             >
+              <Menu.Item key="2">
+                <Link to="/register">
+                  Criar conta
+                </Link>
+              </Menu.Item>
               <Menu.Item key="1">
                 <Link to="/login">
                   Entrar <Icon type="login" />
