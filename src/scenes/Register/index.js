@@ -29,6 +29,7 @@ class Register extends Component {
 
   constructor(props) {
     super(props);
+    console.log("registerProps", props);
     this.state = { loading: true, redirect: false };
   }
 

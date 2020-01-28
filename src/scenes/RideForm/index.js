@@ -22,9 +22,16 @@ function onChange(value) {
 }
 
 class RideForm extends Component {
+  constructor(props) {
+    super(props);
+    console.log("rideProps", props);
+    this.state = { loading: true, redirect: false };
+  }
+
   state = {
     fga: false
   };
+
   LOCATIONS = [
     "Ceilândia",
     "Samambaia",
@@ -76,8 +83,7 @@ class RideForm extends Component {
   };
 
   render() {
-    const endFGA = "Universidade de Brasília - Gama, Gama Leste, Brasília";
-
+    const addressFGA = "Universidade de Brasília - Gama, Gama Leste, Brasília";
     const { Option } = Select;
     const format = "HH:mm";
     return (
@@ -99,8 +105,8 @@ class RideForm extends Component {
                   />
                 </Col>
               </Row>
-              <Form>
-                <Form.Item label="Região de origem" hasFeedback>
+              <Form onSubmit={this.handleSubmit}>
+                <Form.Item label="Região" hasFeedback>
                   <Select name="location" placeholder="Selecione uma região">
                     {this.LOCATIONS.map((item, i) => {
                       return (
@@ -115,14 +121,14 @@ class RideForm extends Component {
                   <Input
                     name="origin"
                     placeholder="Indique o endereço"
-                    value={this.state.fga ? endFGA : null}
+                    value={this.state.fga ? addressFGA : null}
                   />
                 </Form.Item>
                 <Form.Item label="Destino">
                   <Input
                     name="destiny"
                     placeholder="Destino"
-                    value={this.state.fga ? null : endFGA}
+                    value={this.state.fga ? null : addressFGA}
                   />
                 </Form.Item>
                 <Row gutter={24}>
@@ -174,7 +180,7 @@ class RideForm extends Component {
                 <Form.Item label="Observações">
                   <TextArea
                     name="notes"
-                    placeholder="Aqui você pode informar alguma restrição ou rota específica"
+                    placeholder="Aqui você pode informar alguma restrição ou rota específica. É recomendado indicar o ponto de encontro com referências"
                   />
                 </Form.Item>
                 <Form.Item>

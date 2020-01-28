@@ -42,7 +42,7 @@ class CarForm extends Component {
           <Col span={6}>
             <div className="car-form">
               <h1>Adicionar carro</h1>
-              <Form>
+              <Form onSubmit={this.handleSubmit}>
                 <Form.Item label="Modelo">
                   {getFieldDecorator("model", {
                     rules: [
