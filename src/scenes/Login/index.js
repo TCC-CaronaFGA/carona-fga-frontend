@@ -10,7 +10,7 @@ setupInterceptors();
 class Login extends Component {
   constructor(props) {
     super(props);
-    console.log("LoginProps", props);
+    //console.log("LoginProps", props);
     this.state = { loading: true, redirect: false };
   }
 
