@@ -7,13 +7,13 @@ class Home extends Component {
   render() {
     return (
       <div className="App">
-        {(this.props.user == null) ? (
+        {this.props.user == null ? (
           <div className="spin">
             <Spin tip="Carregando..." />
           </div>
         ) : (
-          <p>"Bem vindo {this.props.user.name}"</p>
-          )}
+          <h1>Bem vindo(a), {this.props.user.name}</h1>
+        )}
       </div>
     );
   }
@@ -22,7 +22,7 @@ class Home extends Component {
 const mapStateToProps = state => {
   return {
     user: state.user
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps,{})(Home);
+export default connect(mapStateToProps, {})(Home);
