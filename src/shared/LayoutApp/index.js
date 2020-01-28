@@ -4,17 +4,18 @@ import "./styles.scss";
 import Navigation from "../../components/Menu";
 import { setupInterceptors } from "../../auth/SetupInterceptors";
 import { checkLogin } from "./_/actions";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import Sider from "antd/lib/layout/Sider";
 
 setupInterceptors();
 class LayoutApp extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = {redirect: false}
+    this.state = { redirect: false };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     /*const token = localStorage.getItem("auth_token");
     if(token != null){
       this.props.checkLogin(this.loginCallback.bind(this));
@@ -24,7 +25,7 @@ class LayoutApp extends Component {
     }*/
   }
 
-  componentDidUpdate(oldProps){
+  componentDidUpdate(oldProps) {
     /*if(JSON.stringify(this.props.user) !== JSON.stringify(oldProps.user)){
       const token = localStorage.getItem("auth_token");
       if(token != null){
@@ -36,21 +37,21 @@ class LayoutApp extends Component {
     }*/
   }
 
-  loginCallback(didLogin){
-    if(!didLogin){
-      this.setState({redirect: true});
+  loginCallback(didLogin) {
+    if (!didLogin) {
+      this.setState({ redirect: true });
     }
   }
 
   render() {
     const { Content, Header } = Layout;
-    const {user} = this.props;
+    const { user } = this.props;
     console.log(user);
     return (
       <Layout>
-        {this.state.redirect && <Redirect to = "/login" />}
+        {this.state.redirect && <Redirect to="/login" />}
         <Header>
-          <Navigation user={user}/>
+          <Navigation user={user} />
         </Header>
         <Content>
           <div className="max-container">{this.props.children}</div>
@@ -63,7 +64,7 @@ class LayoutApp extends Component {
 const mapStateToProps = state => {
   return {
     user: state.user
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps,{checkLogin})(LayoutApp);
+export default connect(mapStateToProps, { checkLogin })(LayoutApp);

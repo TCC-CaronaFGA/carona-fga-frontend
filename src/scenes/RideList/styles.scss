@@ -27,10 +27,18 @@ h1 {
 }
 
 .filter {
-  border: 1.5px solid $ebony;
-  border-radius: 20px;
+  // border: 1.5px solid $ebony;
+  // border-radius: 0px;
 
-  .ant-select-selection {
+  .ant-input, .ant-input:hover {
+    border-radius: 0;
+  }
+
+  .ant-input-affix-wrapper:hover .ant-input:not(.ant-input-disabled) {
+    border-color: $gigas !important;
+  }
+
+  .ant-select-selection, .ant-input {
     background-color: transparent;
   }
 
@@ -44,3 +52,20 @@ h1 {
     color: $ebony !important;
   }
 }
+
+.modal {
+  .ant-btn {
+    width: auto;
+    background-color: transparent !important;
+  }
+  .ant-btn:hover {
+    color: $alto;
+  }
+  .ant-btn-primary {
+    background-color: $gigas !important;
+  }
+  .ant-modal-title {
+    text-align: center;
+    font-size: 18px;
+  }
+} 

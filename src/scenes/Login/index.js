@@ -46,7 +46,7 @@ class Login extends Component {
     return (
       <div className="section">
         {this.state.redirect && <Redirect to="/" />}
-        <Col span={6}>
+        <Col md={8} lg={6} sm={12} xs={24}>
           <div className="login">
             <h1 className="login-title">
               Carona<b>FGA</b>

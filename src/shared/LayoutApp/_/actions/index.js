@@ -4,7 +4,8 @@ import {
   loginRoute,
   authStatusRoute,
   logoutRoute,
-  registerRoute
+  registerRoute,
+  createRideRoute
 } from "../../../../constants/apiRoutes";
 import { FETCH_USER, LOGOUT_USER } from "./types";
 
@@ -67,6 +68,21 @@ export function checkLogin(callback) {
         }
       })
       .catch(error => {
+        callback(false);
+      });
+  };
+}
+
+export function createRide(values, callback) {
+  return dispatch => {
+    Axios.post(createRideRoute, values)
+      .then(response => {
+        if (response.status === 201) {
+          // dispatch({ type: FETCH_USER, payload: response.data.data });
+          // callback(true);
+        }
+      })
+      .catch(() => {
         callback(false);
       });
   };

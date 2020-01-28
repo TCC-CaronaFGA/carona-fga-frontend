@@ -2,7 +2,7 @@
   .ant-list-item {
     min-height: 150px;
     margin: 0 5%;
-    background-color: $martinique;
+    background-color: $comet;
     border-radius: 10px;
     cursor: pointer;
     .ant-list-item-meta {
@@ -16,5 +16,8 @@
         color: $alto;
       }
     }
+  }
+  .ant-btn {
+    background-color: $marguerite !important;
   }
 }

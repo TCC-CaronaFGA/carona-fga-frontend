@@ -13,6 +13,9 @@ import {
 } from "antd";
 import "./styles.scss";
 import moment from "moment";
+import TextArea from "antd/lib/input/TextArea";
+import { createRide } from "../../shared/LayoutApp/_/actions";
+import { connect } from "react-redux";
 
 function onChange(value) {
   console.log("changed", value);
@@ -53,7 +56,21 @@ class RideForm extends Component {
     "SIA"
   ];
 
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        console.log("Valores recebidos do formulário da carona: ", values);
+      }
+    });
+  };
+
   render() {
+    const {
+      getFieldDecorator,
+      getFieldsError,
+      getFieldError
+    } = this.props.form;
     const { Option } = Select;
     const format = "HH:mm";
     return (
@@ -61,11 +78,11 @@ class RideForm extends Component {
         <div className="section">
           <Col md={12} lg={10} sm={12} xs={24}>
             <div className="ride-form">
-              <Row gutter={24}>
+              <Row gutter={12}>
                 <Col span={20}>
                   <h1>Oferecer carona</h1>
                 </Col>
-                <Col span={4} style={{ lineHeight: "41px" }}>
+                <Col span={4} style={{ lineHeight: "40px" }}>
                   <Switch
                     checkedChildren="Ida"
                     unCheckedChildren="Volta"
@@ -76,7 +93,7 @@ class RideForm extends Component {
               </Row>
               <Form>
                 <Form.Item label="Região de origem" hasFeedback>
-                  <Select placeholder="Selecione uma região">
+                  <Select name="location" placeholder="Selecione uma região">
                     {this.LOCATIONS.map((item, i) => {
                       return (
                         <Option value={item} key={i}>
@@ -87,10 +104,11 @@ class RideForm extends Component {
                   </Select>
                 </Form.Item>
                 <Form.Item label="Origem">
-                  <Input placeholder="Indique o endereço" />
+                  <Input name="origin" placeholder="Indique o endereço" />
                 </Form.Item>
                 <Form.Item label="Destino">
                   <Input
+                    name="destiny"
                     placeholder="Destino"
                     value="Universidade de Brasília - Gama, Gama Leste, Brasília"
                   />
@@ -124,9 +142,15 @@ class RideForm extends Component {
                       />
                     </Form.Item>
                   </Col>
+                  {/* <Col span={12}>
+                    <Form.Item label="Data e horário de saída">
+                      <DatePicker placeholder="Selecione a data" />
+                    </Form.Item>
+                  </Col> */}
                   <Col span={8}>
                     <Form.Item label="Assentos disponíveis">
                       <InputNumber
+                        name="availableSeats"
                         min={1}
                         max={4}
                         defaultValue={1}
@@ -135,6 +159,12 @@ class RideForm extends Component {
                     </Form.Item>
                   </Col>
                 </Row>
+                <Form.Item label="Observações">
+                  <TextArea
+                    name="notes"
+                    placeholder="Aqui você pode informar alguma restrição ou rota específica"
+                  />
+                </Form.Item>
                 <Form.Item>
                   <Button type="primary" htmlType="submit">
                     OFERECER CARONA
@@ -149,4 +179,6 @@ class RideForm extends Component {
   }
 }
 
-export default RideForm;
+export default Form.create({ name: "rideForm" })(
+  connect(null, { createRide })(RideForm)
+);

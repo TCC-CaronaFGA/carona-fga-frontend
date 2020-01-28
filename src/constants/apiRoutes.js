@@ -3,3 +3,4 @@ export const loginRoute = baseURL + "/auth/login";
 export const registerRoute = baseURL + "/auth/registration";
 export const logoutRoute = baseURL + "/auth/logout";
 export const authStatusRoute = baseURL + "/auth/status";
+export const createRideRoute = baseURL + "/auth/create-ride";
