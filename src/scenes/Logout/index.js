@@ -20,6 +20,7 @@ class Login extends Component {
   }
 
   logoutCallback(){
+    localStorage.removeItem("auth_token");
     this.setState({redirect: true});
   }
 

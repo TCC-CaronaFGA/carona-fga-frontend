@@ -1,7 +1,14 @@
-.content {
-	width: 25%;
+@import "../../shared/LayoutApp/styles.scss";
+
+.car-form {
+	background-color: $ebony;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 20px;
 	h1 {
-    margin: 0;
-    padding: 32px 0 0 0 !important;
+		margin: 0;
+		padding: 32px 0 0 0 !important;
+		text-align: center;
+		color: $alto !important;
 	}
 }
