@@ -22,6 +22,9 @@ function onChange(value) {
 }
 
 class RideForm extends Component {
+  state = {
+    fga: false
+  };
   LOCATIONS = [
     "Ceilândia",
     "Samambaia",
@@ -65,12 +68,16 @@ class RideForm extends Component {
     });
   };
 
+  goingToFGA = () => {
+    let isGoing = this.state.fga ? false : true;
+    this.setState({
+      fga: isGoing
+    });
+  };
+
   render() {
-    const {
-      getFieldDecorator,
-      getFieldsError,
-      getFieldError
-    } = this.props.form;
+    const endFGA = "Universidade de Brasília - Gama, Gama Leste, Brasília";
+
     const { Option } = Select;
     const format = "HH:mm";
     return (
@@ -84,6 +91,7 @@ class RideForm extends Component {
                 </Col>
                 <Col span={4} style={{ lineHeight: "40px" }}>
                   <Switch
+                    onChange={this.goingToFGA}
                     checkedChildren="Ida"
                     unCheckedChildren="Volta"
                     defaultChecked
@@ -104,13 +112,17 @@ class RideForm extends Component {
                   </Select>
                 </Form.Item>
                 <Form.Item label="Origem">
-                  <Input name="origin" placeholder="Indique o endereço" />
+                  <Input
+                    name="origin"
+                    placeholder="Indique o endereço"
+                    value={this.state.fga ? endFGA : null}
+                  />
                 </Form.Item>
                 <Form.Item label="Destino">
                   <Input
                     name="destiny"
                     placeholder="Destino"
-                    value="Universidade de Brasília - Gama, Gama Leste, Brasília"
+                    value={this.state.fga ? null : endFGA}
                   />
                 </Form.Item>
                 <Row gutter={24}>

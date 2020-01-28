@@ -6,7 +6,6 @@ import { setupInterceptors } from "../../auth/SetupInterceptors";
 import { checkLogin } from "./_/actions";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import Sider from "antd/lib/layout/Sider";
 
 setupInterceptors();
 class LayoutApp extends Component {
