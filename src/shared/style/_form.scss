@@ -3,6 +3,19 @@
 }
 
 
-.ant-input, .ant-input:hover {
+.ant-input, .ant-input:hover,
+.ant-time-picker-input,
+.ant-input-number,
+.ant-select-selection {
 	border-radius: 50px;
+}
+
+.has-error .ant-form-explain,
+.ant-form-item-required::before {
+	color: $alert;
+}
+
+.has-error .ant-input,
+.has-error .ant-input:not([disabled]):hover {
+	border-color: $alert;
 }

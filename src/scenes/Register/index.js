@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Input, Button, Select, Radio } from "antd";
+import { Form, Input, Button, Select, Radio, Row, Col } from "antd";
 import { setupInterceptors } from "../../auth/SetupInterceptors";
 import { Redirect } from "react-router-dom";
 import "../../shared/LayoutApp/styles.scss";
@@ -55,7 +55,7 @@ class Register extends Component {
   };
 
   render() {
-    // const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator } = this.props.form;
 		const { Option } = Select;
 		
     return (
@@ -65,10 +65,18 @@ class Register extends Component {
           <h1 className="register-title">Registre-se</h1>
             <Form onSubmit={this.handleSubmit} className="login-form">
               <Form.Item label="Nome">
-                <Input />
+              {getFieldDecorator("name", {
+									rules: [
+										{
+											required: true,
+											message: 'Insira seu nome.',
+										},
+									],
+								})
+								(<Input />)} 
               </Form.Item>
               <Form.Item label="E-mail">
-                {/* {getFieldDecorator("email", {
+                 {getFieldDecorator("email", {
 									rules: [
 										{
 											type: 'email',
@@ -80,60 +88,86 @@ class Register extends Component {
 										},
 									],
 								})
-								(<Input />)} */}
-                <Input />)
+								(<Input />)} 
               </Form.Item>
               <Form.Item label="Curso" hasFeedback>
-                <Select placeholder="Selecione um curso">
-                  {this.COURSES.map((item, i) => {
-                    return (
-                      <Option value={item} key={i}>
-                        {item}
-                      </Option>
-                    );
-                  })}
-                </Select>
-              </Form.Item>
-              <Form.Item label="Celular">
-								{/* {getFieldDecorator('phone', {
-									rules: [{ required: true, message: 'Please input your phone number!' }],
-								})(<Input addonBefore={prefixSelector} style={{ width: '100%' }} />)} */}
-                <Input />
-              </Form.Item>
-              <Form.Item label="Gênero">
-                <Radio.Group onChange={this.onChange} value={this.state.value}>
-                  <Radio value={"F"}>Feminino</Radio>
-                  <Radio value={"M"}>Masculino</Radio>
-                </Radio.Group>
-              </Form.Item>
-              <Form.Item label="Senha" hasFeedback>
-                {/* {getFieldDecorator("password", {
+              {getFieldDecorator("course", {
                   rules: [
                     {
                       required: true,
-                      message: "Please input your password!"
-                    },
-                    {
-                      validator: this.validateToNextPassword
+                      message: "Selecione seu curso."
                     }
                   ]
-                })(<Input.Password />)} */}
-								<Input placeholder="Senha" />
+                })(
+                  <Select placeholder="Selecione um curso">
+                    {this.COURSES.map((item, i) => {
+                      return (
+                        <Option value={item} key={i}>
+                          {item}
+                        </Option>
+                      );
+                    })}
+                  </Select>
+                )}
               </Form.Item>
-              <Form.Item label="Confirmar senha" hasFeedback>
-                {/* {getFieldDecorator("confirm", {
-                  rules: [
-                    {
-                      required: true,
-                      message: "Please confirm your password!"
-                    },
-                    {
-                      validator: this.compareToFirstPassword
-                    }
-                  ]
-                })(<Input.Password onBlur={this.handleConfirmBlur} />)} */}
-								<Input placeholder="Senha" />
-              </Form.Item>
+              <Row gutter={24}>
+                <Col span="12">
+                  <Form.Item label="Celular">
+                    {getFieldDecorator('phone', {
+                      rules: [{ required: true, message: 'Insira seu telefone.' }],
+                    })(<Input />)}
+                  </Form.Item>
+                </Col>
+                <Col span="12">
+                  <Form.Item label="Gênero">
+                    {getFieldDecorator("course", {
+                      rules: [
+                        {
+                          required: true,
+                          message: "Selecione seu gênero."
+                        }
+                      ]
+                    })(
+                      <Radio.Group onChange={this.onChange} value={this.state.value}>
+                      <Radio value={"F"}>Feminino</Radio>
+                      <Radio value={"M"}>Masculino</Radio>
+                    </Radio.Group>
+                    )}
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={24}>
+                <Col span="12">
+                  <Form.Item label="Senha" hasFeedback>
+                    {getFieldDecorator("password", {
+                      rules: [
+                        {
+                          required: true,
+                          message: "Insira sua senha."
+                        },
+                        {
+                          validator: this.validateToNextPassword
+                        }
+                      ]
+                    })(<Input.Password />)}
+                  </Form.Item>
+                </Col>
+                <Col span="12">
+                  <Form.Item label="Confirmar senha" hasFeedback>
+                    {getFieldDecorator("confirm", {
+                      rules: [
+                        {
+                          required: true,
+                          message: "Confira sua senha."
+                        },
+                        {
+                          validator: this.compareToFirstPassword
+                        }
+                      ]
+                    })(<Input.Password onBlur={this.handleConfirmBlur} />)}
+                  </Form.Item>
+                </Col>
+              </Row>
               <Form.Item>
                 <Button
                   type="primary"
@@ -149,4 +183,5 @@ class Register extends Component {
     );
   }
 }
-export default Register;
+
+export default Form.create({name: 'registerForm'})(Register);

@@ -8,13 +8,13 @@ setupInterceptors();
 export function login(values, callback) {
   return dispatch => {
     Axios.post(loginRoute, values).then((response) => {
-        if(response.status === 200){
-            dispatch({type: FETCH_USER, payload: response.data.data});
-            callback(true);
-        }
-      })
-      .catch(() => {
-            callback(false);
+      if(response.status === 200){
+        dispatch({type: FETCH_USER, payload: response.data.data});
+        callback(true);
+      }
+    })
+    .catch(() => {
+      callback(false);
     });
   };
 }

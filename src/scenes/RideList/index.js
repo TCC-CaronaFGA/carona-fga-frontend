@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Row, Col, List, Icon } from "antd";
+import { Form, Row, Col, List, Icon, Select } from "antd";
 import "./styles.scss";
 
 class RideList extends Component {
@@ -65,14 +65,59 @@ class RideList extends Component {
     };
   }
 
+  LOCATIONS = [
+    "Ceilândia",
+    "Samambaia",
+    "Taguatinga",
+    "Plano Piloto",
+    "Planaltina",
+    "Águas Claras",
+    "Recanto das Emas",
+    "Gama",
+    "Guará",
+    "Santa Maria",
+    "Sobradinho II",
+    "São Sebastião",
+    "Vicente Pires",
+    "Itapoã",
+    "Sobradinho",
+    "Sudoeste/Octogonal",
+    "Brazlândia",
+    "Riacho Fundo II",
+    "Paranoá",
+    "Riacho Fundo",
+    "SCIA",
+    "Lago Norte",
+    "Cruzeiro",
+    "Lago Sul",
+    "Jardim Botânico",
+    "Núcleo Bandeirante",
+    "Park Way",
+    "Candangolândia",
+    "Varjão",
+    "Fercal",
+    "SIA"
+  ];
+
   render() {
+    const { Option } = Select;
     return (
       <>
         <h1>Caronas disponíveis</h1>
         <Form>
-          <Row gutter={30}>
-            <Col span={8}>
-              <Form.Item>Filtro por região</Form.Item>
+          <Row gutter={16}>
+            <Col span={6}>
+              <Form.Item label="Filtre pela região">
+                <Select placeholder="Selecione uma região">
+                  {this.LOCATIONS.map((item, i) => {
+                    return (
+                      <Option value={item} key={i}>
+                        {item}
+                      </Option>
+                    );
+                  })}
+                </Select>
+              </Form.Item>
             </Col>
           </Row>
         </Form>

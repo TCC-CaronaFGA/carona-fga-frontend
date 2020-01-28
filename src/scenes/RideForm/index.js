@@ -52,6 +52,7 @@ class RideForm extends Component {
     "Fercal",
     "SIA"
   ];
+  
   render() {
     const { Option } = Select;
     const format = "HH:mm";
@@ -67,6 +68,7 @@ class RideForm extends Component {
                 checkedChildren="Ida"
                 unCheckedChildren="Volta"
                 defaultChecked
+                style={{ marginTop: "32px"}}
               />
             </Col>
           </Row>

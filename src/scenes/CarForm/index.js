@@ -16,14 +16,14 @@ class CarForm extends Component {
 						<Form.Item label="Modelo">
               <Input placeholder="Indique o modelo do carro" />
             </Form.Item>
+						<Form.Item label="Ano">
+              <Input placeholder="Indique o ano do carro" />
+            </Form.Item>
             <Form.Item label="Placa">
               <Input placeholder="Indique a placa do carro" />
             </Form.Item>
 						<Form.Item label="Cor">
               <Input placeholder="Indique a cor do carro" />
-            </Form.Item>
-						<Form.Item label="Ano">
-              <Input placeholder="Indique o ano do carro" />
             </Form.Item>
             <Form.Item>
               <Button
