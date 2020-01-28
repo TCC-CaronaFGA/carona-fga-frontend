@@ -6,6 +6,7 @@ h4, h5 {
 
 .vagas-disponiveis {
   border: 1px solid $alert;
+  border-radius: 5px;
   padding: 12px;
   margin: 32px 24px 0 0 ;
   text-align: center;
@@ -14,7 +15,7 @@ h4, h5 {
 .anticon-car {
   font-size: 26px;
   padding: 54px 24px;
-  color: $alto;
+  color: $alert;
 }
 
 h1 {
@@ -23,4 +24,23 @@ h1 {
 
 .ant-form-item-label {
   color: $ebony !important;
+}
+
+.filter {
+  border: 1.5px solid $ebony;
+  border-radius: 20px;
+
+  .ant-select-selection {
+    background-color: transparent;
+  }
+
+  .ant-select-selection .ant-select-selection__placeholder {
+    color: $ebony;
+  }
+}
+
+.filter-title {
+  .ant-form-item-label > label, span.ant-radio + * {
+    color: $ebony !important;
+  }
 }

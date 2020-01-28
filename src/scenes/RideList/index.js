@@ -104,11 +104,11 @@ class RideList extends Component {
     return (
       <>
         <h1>Caronas disponíveis</h1>
-        <Form>
-          <Row gutter={16}>
+        <Form style={{ padding: "0" }}>
+          <Row gutter={24} style={{ margin: "0 0 16px 16px" }}>
             <Col span={6}>
-              <Form.Item label="Filtre pela região">
-                <Select placeholder="Selecione uma região">
+              <Form.Item label="Filtre pela região" className="filter-title">
+                <Select placeholder="Selecione uma região" className="filter">
                   {this.LOCATIONS.map((item, i) => {
                     return (
                       <Option value={item} key={i}>
