@@ -7,6 +7,7 @@ import RideList from "../../scenes/RideList";
 import Logout from "../../scenes/Logout";
 import Register from "../../scenes/Register";
 import CarForm from "../../scenes/CarForm";
+import Profile from "../../scenes/Profile";
 
 //Data Imports
 
@@ -17,13 +18,18 @@ class Routes extends Component {
     { path: "/create-ride", component: props => <RideForm {...props} /> },
     { path: "/create-car", component: props => <CarForm {...props} /> },
     { path: "/search-ride", component: props => <RideList {...props} /> },
-    { path: "/register", component: props => <Register {...props} /> }
+    { path: "/register", component: props => <Register {...props} /> },
+    { path: "/profile", component: props => <Profile {...props} /> }
   ];
   render() {
     return (
       <>
         <Switch>
-          <Route exact={true} path="/" component={props => <Home {...props} /> } />
+          <Route
+            exact={true}
+            path="/"
+            component={props => <Home {...props} />}
+          />
           {this.MenuItems.map((route, i) => {
             return (
               <Route

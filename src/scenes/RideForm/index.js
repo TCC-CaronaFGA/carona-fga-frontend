@@ -71,6 +71,16 @@ class RideForm extends Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log("Valores recebidos do formulário da carona: ", values);
+        const requisicao = {
+          location: values.location,
+          origin: values.origin,
+          destiny: values.destiny,
+          date: values.date._d,
+          time: values.time._i,
+          availableSeats: values.availableSeats,
+          notes: values.notes
+        };
+        console.log("Requisição ", requisicao);
       }
     });
   };
@@ -83,6 +93,7 @@ class RideForm extends Component {
   };
 
   render() {
+    const { getFieldDecorator } = this.props.form;
     const addressFGA = "Universidade de Brasília - Gama, Gama Leste, Brasília";
     const { Option } = Select;
     const format = "HH:mm";
@@ -107,81 +118,116 @@ class RideForm extends Component {
               </Row>
               <Form onSubmit={this.handleSubmit}>
                 <Form.Item label="Região" hasFeedback>
-                  <Select name="location" placeholder="Selecione uma região">
-                    {this.LOCATIONS.map((item, i) => {
-                      return (
-                        <Option value={item} key={i}>
-                          {item}
-                        </Option>
-                      );
-                    })}
-                  </Select>
+                  {getFieldDecorator("location", {
+                    rules: [
+                      {
+                        required: true,
+                        message: "Insira a região."
+                      }
+                    ]
+                  })(
+                    <Select name="location" placeholder="Selecione uma região">
+                      {this.LOCATIONS.map((item, i) => {
+                        return (
+                          <Option value={item} key={i}>
+                            {item}
+                          </Option>
+                        );
+                      })}
+                    </Select>
+                  )}
                 </Form.Item>
                 <Form.Item label="Origem">
                   <Input
                     name="origin"
                     placeholder="Indique o endereço"
-                    value={this.state.fga ? addressFGA : null}
+                    value={this.state.fga ? addressFGA : ""}
                   />
                 </Form.Item>
                 <Form.Item label="Destino">
                   <Input
                     name="destiny"
                     placeholder="Destino"
-                    value={this.state.fga ? null : addressFGA}
+                    value={this.state.fga ? "" : addressFGA}
                   />
                 </Form.Item>
                 <Row gutter={24}>
                   <Col span={8}>
                     <Form.Item label="Data">
-                      <DatePicker
-                        placeholder="Selecione a data"
-                        format="DD-MM-YYYY"
-                        dateRender={current => {
-                          const style = {};
-                          if (current.date() === 1) {
-                            style.border = "1px solid #1890ff";
-                            style.borderRadius = "50%";
+                      {getFieldDecorator("date", {
+                        rules: [
+                          {
+                            required: true,
+                            message: "Insira a data."
                           }
-                          return (
-                            <div className="ant-calendar-date" style={style}>
-                              {current.date()}
-                            </div>
-                          );
-                        }}
-                      />
+                        ]
+                      })(
+                        <DatePicker
+                          placeholder="Selecione a data"
+                          format="DD-MM-YYYY"
+                          dateRender={current => {
+                            const style = {};
+                            if (current.date() === 1) {
+                              style.border = "1px solid #1890ff";
+                              style.borderRadius = "50%";
+                            }
+                            return (
+                              <div className="ant-calendar-date" style={style}>
+                                {current.date()}
+                              </div>
+                            );
+                          }}
+                        />
+                      )}
                     </Form.Item>
                   </Col>
                   <Col span={8}>
                     <Form.Item label="Horário">
-                      <TimePicker
-                        defaultValue={moment("08:00", format)}
-                        format={format}
-                      />
+                      {getFieldDecorator("time", {
+                        rules: [
+                          {
+                            type: "object",
+                            required: true,
+                            message: "Insira o horário de saída."
+                          }
+                        ]
+                      })(<TimePicker placeholder="08:00" format={format} />)}
                     </Form.Item>
                   </Col>
                   {/* <Col span={12}>
-                    <Form.Item label="Data e horário de saída">
-                      <DatePicker placeholder="Selecione a data" />
-                    </Form.Item>
+                      <Form.Item label="Data e horário de saída">
+                        <DatePicker placeholder="Selecione a data" />
+                      </Form.Item>
                   </Col> */}
                   <Col span={8}>
                     <Form.Item label="Assentos disponíveis">
-                      <InputNumber
-                        name="availableSeats"
-                        min={1}
-                        max={4}
-                        defaultValue={1}
-                        onChange={onChange}
-                      />
+                      {getFieldDecorator("availableSeats", {
+                        rules: [
+                          {
+                            required: true,
+                            message:
+                              "Insira a quantidade de assentos disponíveis."
+                          }
+                        ]
+                      })(
+                        <InputNumber
+                          name="availableSeats"
+                          min={1}
+                          max={4}
+                          placeholder="1"
+                          onChange={onChange}
+                        />
+                      )}
                     </Form.Item>
                   </Col>
                 </Row>
                 <Form.Item label="Observações">
-                  <TextArea
-                    name="notes"
-                    placeholder="Aqui você pode informar alguma restrição ou rota específica. É recomendado indicar o ponto de encontro com referências"
-                  />
+                  {getFieldDecorator("notes")(
+                    <TextArea
+                      name="notes"
+                      placeholder="Aqui você pode informar alguma restrição ou rota específica. É recomendado indicar o ponto de encontro com referências"
+                    />
+                  )}
                 </Form.Item>
                 <Form.Item>
                   <Button type="primary" htmlType="submit">

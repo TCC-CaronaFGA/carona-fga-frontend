@@ -5,7 +5,7 @@ import "./styles.scss";
 
 class Navigation extends Component {
   render() {
-    const logged = Object.keys(this.props.user).length !== 0; 
+    const logged = Object.keys(this.props.user).length !== 0;
     console.log(logged, this.props.user);
     return (
       <>
@@ -45,9 +45,7 @@ class Navigation extends Component {
               style={{ lineHeight: "56px", float: "right" }}
             >
               <Menu.Item key="2">
-                <Link to="/register">
-                  Criar conta
-                </Link>
+                <Link to="/register">Criar conta</Link>
               </Menu.Item>
               <Menu.Item key="1">
                 <Link to="/login">
@@ -56,7 +54,7 @@ class Navigation extends Component {
               </Menu.Item>
             </Menu>
           </>
-          )}
+        )}
       </>
     );
   }
