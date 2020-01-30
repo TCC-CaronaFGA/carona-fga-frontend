@@ -12,7 +12,7 @@
 .ant-menu-horizontal > .ant-menu-item > a {
   color: $alto;
   margin-top: -2px;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .ant-menu-horizontal > .ant-menu-item:hover,
@@ -20,8 +20,13 @@
   color: $alto;
 }
 
+.ant-menu-item {
+  padding: 0 30px !important;
+}
+
 .ant-menu-item .anticon {
-  font-size: 16px;
+  font-size: 20px;
+  margin-right: 30px;
 }
 
 .ant-menu-horizontal > .ant-menu-item,
@@ -29,4 +34,24 @@
 .ant-menu-horizontal > .ant-menu-item-selected {
   border-bottom: 1px solid $gigas;
   top: 0;
+}
+
+.ant-layout-sider {
+  line-height: 200px;
+}
+
+.ant-layout-sider-children {
+  background-color: $gigas;
+}
+
+.ant-layout-sider-trigger {
+  background-color: $martinique;
+}
+
+.ant-menu.ant-menu-dark .ant-menu-item-selected {
+  background-color: transparent;
+}
+
+.ant-menu-item {
+  border-bottom: 1px solid $comet;
 }

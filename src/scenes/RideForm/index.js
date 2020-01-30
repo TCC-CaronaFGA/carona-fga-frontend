@@ -12,7 +12,6 @@ import {
   Button
 } from "antd";
 import "./styles.scss";
-import moment from "moment";
 import TextArea from "antd/lib/input/TextArea";
 import { createRide } from "../../shared/LayoutApp/_/actions";
 import { connect } from "react-redux";

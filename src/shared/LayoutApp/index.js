@@ -43,19 +43,37 @@ class LayoutApp extends Component {
   }
 
   render() {
+    const logged = Object.keys(this.props.user).length !== 0;
     const { Content, Header } = Layout;
     const { user } = this.props;
-    console.log(user);
+    //console.log(user);
     return (
-      <Layout>
-        {this.state.redirect && <Redirect to="/login" />}
-        <Header>
-          <Navigation user={user} />
-        </Header>
-        <Content>
-          <div className="max-container">{this.props.children}</div>
-        </Content>
-      </Layout>
+      <>
+        {!logged ? (
+          <>
+            <Layout>
+              {this.state.redirect && <Redirect to="/login" />}
+              <Header>
+                <Navigation user={user} />
+              </Header>
+              <Content>
+                <div className="max-container">{this.props.children}</div>
+              </Content>
+            </Layout>
+          </>
+        ) : (
+          <>
+            <Layout>
+              <Navigation user={user} />
+              <Layout style={{ marginLeft: 200 }}>
+                <Content>
+                  <div className="max-container">{this.props.children}</div>
+                </Content>
+              </Layout>
+            </Layout>
+          </>
+        )}
+      </>
     );
   }
 }
