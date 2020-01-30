@@ -1,4 +1,4 @@
-.ant-layout {
+.ant-layout.layout-app {
 	background-color: $ebony;
 	height: 100vh;
 	overflow: hidden;
@@ -10,6 +10,15 @@
 	display: flex;
 	justify-content: center;
 
+	// .App {
+	// 	margin-left: 200px !important;
+	// }
+
+	// .logged {
+	// 	margin-left: 200px !important;
+	// }
+	
+	
 	.content {
 		background-color: $ebony;
 		border-radius: 20px;
@@ -21,7 +30,7 @@
 			color: $alto !important;
 		}
 	}
-
+	
 	.section {
 		height: 100vh;
 		display: flex;
@@ -30,7 +39,14 @@
 	}
 }
 
+.not-logged {
+	.ant-layout-content {
+		margin-left: 0 !important;
+	}
+}
+
 .ant-layout-content {
 	min-height: 200px;
 	line-height: 200px;
+	margin-left: 200px;
 }

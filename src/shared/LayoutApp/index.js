@@ -51,7 +51,7 @@ class LayoutApp extends Component {
       <>
         {!logged ? (
           <>
-            <Layout>
+            <Layout className="layout-app not-logged">
               {this.state.redirect && <Redirect to="/login" />}
               <Header>
                 <Navigation user={user} />
@@ -65,7 +65,7 @@ class LayoutApp extends Component {
           <>
             <Layout>
               <Navigation user={user} />
-              <Layout style={{ marginLeft: 200 }}>
+              <Layout className="layout-app">
                 <Content>
                   <div className="max-container">{this.props.children}</div>
                 </Content>
