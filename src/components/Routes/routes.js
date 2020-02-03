@@ -8,6 +8,7 @@ import Logout from "../../scenes/Logout";
 import Register from "../../scenes/Register";
 import CarForm from "../../scenes/CarForm";
 import Profile from "../../scenes/Profile";
+import Ranking from "../../scenes/Ranking";
 
 //Data Imports
 
@@ -19,7 +20,8 @@ class Routes extends Component {
     { path: "/create-car", component: props => <CarForm {...props} /> },
     { path: "/search-ride", component: props => <RideList {...props} /> },
     { path: "/register", component: props => <Register {...props} /> },
-    { path: "/profile", component: props => <Profile {...props} /> }
+    { path: "/profile", component: props => <Profile {...props} /> },
+    { path: "/ranking", component: props => <Ranking {...props} /> }
   ];
   render() {
     return (

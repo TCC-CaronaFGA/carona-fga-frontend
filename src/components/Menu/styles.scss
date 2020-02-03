@@ -52,6 +52,19 @@
   background-color: transparent;
 }
 
+.ant-menu-inline {
+  .ant-menu-item:first-child {
+    margin: 24px 0 80px 0;
+    border: none;
+    color: $alto;
+  }
+}
+
 .ant-menu-item {
   border-bottom: 1px solid $comet;
+
+  .anticon-car {
+    padding: 0;
+    color: $alto !important;
+  }
 }

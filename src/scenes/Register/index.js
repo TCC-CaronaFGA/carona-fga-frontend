@@ -46,8 +46,8 @@ class Register extends Component {
     success
       ? this.setState({ redirect: true })
       : notification.open({
-          message: "Erro ao criar usuário",
-          description: "Não foi possível criar o usuário.",
+          message: "Usuário criado com sucesso!",
+          description: "",
           style: {
             width: 600,
             marginLeft: 335 - 600

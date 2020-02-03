@@ -46,6 +46,7 @@ class Navigation extends Component {
               </Menu.Item>
             </Menu> */}
             <Sider
+              className="menu-lateral"
               collapsible
               collapsed={this.state.collapsed}
               onCollapse={this.onCollapse}
@@ -56,45 +57,50 @@ class Navigation extends Component {
                 left: 0
               }}
             >
-              <div className="logo" />
               <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
                 <Menu.Item key="1">
+                  <Link to="/">
+                    <Icon type="car" />
+                    CARONA<b>FGA</b>
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="2">
                   <Link to="/search-ride">
                     <Icon type="search" />
                     Procurar
                   </Link>
                 </Menu.Item>
-                <Menu.Item key="2">
+                <Menu.Item key="3">
                   <Link to="/create-ride">
                     <Icon type="plus-circle" />
                     Oferecer carona
                   </Link>
                 </Menu.Item>
-                <Menu.Item key="3">
+                <Menu.Item key="4">
                   <Link to="/profile">
                     <Icon type="user" />
                     Meu perfil
                   </Link>
                 </Menu.Item>
-                <Menu.Item key="4">
+                <Menu.Item key="5">
                   <Link to="/solicitations">
                     <Icon type="notification" />
                     Solicitações
                   </Link>
                 </Menu.Item>
-                <Menu.Item key="5">
+                <Menu.Item key="6">
                   <Link to="/evaluations">
                     <Icon type="star" />
                     Avaliações
                   </Link>
                 </Menu.Item>
-                <Menu.Item key="6">
+                <Menu.Item key="7">
                   <Link to="/ranking">
                     <Icon type="trophy" />
                     Ranking
                   </Link>
                 </Menu.Item>
-                <Menu.Item key="7">
+                <Menu.Item key="8">
                   <Link to="/logout">
                     <Icon type="login" />
                     Sair

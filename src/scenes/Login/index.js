@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Icon, Input, Button, Row, Col } from "antd";
+import { Form, Icon, Input, Button, Row, Col, notification } from "antd";
 import { setupInterceptors } from "../../auth/SetupInterceptors";
 import { connect } from "react-redux";
 import { login, checkLogin } from "../../shared/LayoutApp/_/actions";
@@ -38,6 +38,14 @@ class Login extends Component {
       this.setState({ redirect: true });
     } else {
       this.setState({ loading: false });
+      notification.open({
+        message: "Erro interno",
+        description: "Não foi possível fazer o login",
+        style: {
+          width: 600,
+          marginLeft: 335 - 600
+        }
+      });
     }
   }
 
