@@ -95,7 +95,6 @@ class RideForm extends Component {
     const { getFieldDecorator } = this.props.form;
     const addressFGA = "Universidade de Brasília - Gama, Gama Leste, Brasília";
     const { Option } = Select;
-    const format = "HH:mm";
     return (
       <>
         <div className="section">
