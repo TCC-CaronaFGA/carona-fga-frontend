@@ -90,7 +90,7 @@ class Register extends Component {
                     message: "Insira seu nome."
                   }
                 ]
-              })(<Input />)}
+              })(<Input minLength="3" />)}
             </Form.Item>
             <Form.Item label="E-mail">
               {getFieldDecorator("email", {
@@ -152,7 +152,7 @@ class Register extends Component {
                 <Form.Item label="Celular">
                   {getFieldDecorator("phone", {
                     rules: [{ required: true, message: "Insira seu telefone." }]
-                  })(<Input />)}
+                  })(<Input maxLength="11" />)}
                 </Form.Item>
               </Col>
               <Col span={12}>

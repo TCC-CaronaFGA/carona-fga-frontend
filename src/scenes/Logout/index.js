@@ -1,36 +1,36 @@
 import React, { Component } from "react";
 import { setupInterceptors } from "../../auth/SetupInterceptors";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import { logout } from "../../shared/LayoutApp/_/actions";
 import { Spin } from "antd";
 import { Redirect } from "react-router-dom";
+import "./styles.scss";
 
 setupInterceptors();
 class Login extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = {redirect: false};
+    this.state = { redirect: false };
     const token = localStorage.getItem("auth_token");
-    if(token != null){
+    if (token != null) {
       this.props.logout(this.logoutCallback.bind(this));
-    }
-    else {
+    } else {
       this.logoutCallback();
     }
   }
 
-  logoutCallback(){
+  logoutCallback() {
     localStorage.removeItem("auth_token");
-    this.setState({redirect: true});
+    this.setState({ redirect: true });
   }
 
   render() {
     return (
       <div className="spin">
-        {this.state.redirect && <Redirect to = "/login" />}
+        {this.state.redirect && <Redirect to="/login" />}
         <Spin tip="Carregando..." />
       </div>
     );
   }
 }
-export default (connect(null, {logout})(Login));
+export default connect(null, { logout })(Login);

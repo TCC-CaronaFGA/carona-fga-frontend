@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Spin, Table } from "antd";
 import { connect } from "react-redux";
+import "./styles.scss";
 
 class Ranking extends Component {
   dataSource = [
@@ -46,7 +47,7 @@ class Ranking extends Component {
       key: "name"
     },
     {
-      title: "Quantidade",
+      title: "Caronas",
       dataIndex: "qtdRides",
       key: "qtdRides"
     }

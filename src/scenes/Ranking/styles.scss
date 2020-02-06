@@ -1,0 +1,11 @@
+
+@import "../../shared/LayoutApp/styles.scss";
+
+.ant-table-wrapper {
+    padding: 32px;
+}
+
+.ant-table-tbody > tr {
+    background-color: $comet;
+    color: $alto;
+}

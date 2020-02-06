@@ -190,7 +190,10 @@ class RideForm extends Component {
                             message: "Insira o horário de saída."
                           }
                         ]
-                      })(<TimePicker placeholder="08:00" format={format} />)}
+                      })(
+                        <TimePicker placeholder="08:00" format="hh:mm" />
+                        // <Input type="time"/>
+                      )}
                     </Form.Item>
                   </Col>
                   {/* <Col span={12}>
@@ -213,7 +216,6 @@ class RideForm extends Component {
                           name="availableSeats"
                           min={1}
                           max={4}
-                          placeholder="1"
                           onChange={onChange}
                         />
                       )}
