@@ -2,83 +2,32 @@ import React, { Component } from "react";
 import { Form, Row, Col, List, Icon, Modal, Button } from "antd";
 import "./styles.scss";
 import Search from "antd/lib/input/Search";
+import { setupInterceptors } from "../../auth/SetupInterceptors";
+import Axios from "axios";
+import { rideRoute } from "../../constants/apiRoutes";
 
 class RideList extends Component {
   constructor(props) {
     super(props);
-    const rides = [
-      {
-        dtRide: "8:20",
-        location: "Taguatinga",
-        origin: "Pistão Sul",
-        destiny: "Universidade de Brasília - Gama",
-        availableSeats: 1,
-        notes: null,
-        idCar: 1,
-        idUser: 1,
-        course: "Engenharia de software"
-      },
-      {
-        dtRide: "8:20",
-        location: "Ceilândia",
-        origin: "Rua 1",
-        destiny: "Universidade de Brasília - Gama",
-        availableSeats: 2,
-        notes: null,
-        idCar: 2,
-        idUser: 2,
-        course: "Engenharia de energia"
-      },
-      {
-        dtRide: "8:20",
-        location: "Águas CLaras",
-        origin: "Rua 2",
-        destiny: "Universidade de Brasília - Gama",
-        availableSeats: 3,
-        notes: null,
-        idCar: 3,
-        idUser: 3,
-        course: "Engenharia eletrônica"
-      },
-      {
-        dtRide: "8:20",
-        location: "Taguatinga",
-        origin: "Pistão Norte",
-        destiny: "Universidade de Brasília - Gama",
-        availableSeats: 4,
-        notes: null,
-        idCar: 4,
-        idUser: 4,
-        course: "Engenharia automotiva"
-      },
-      {
-        dtRide: "8:20",
-        location: "Asa Sul",
-        origin: "SQS 311",
-        destiny: "Universidade de Brasília - Gama",
-        availableSeats: 1,
-        notes: null,
-        idCar: 5,
-        idUser: 5,
-        course: "Engenharia aeroespacial"
-      },
-      {
-        dtRide: "8:20",
-        location: "Asa norte",
-        origin: "SQN 311",
-        destiny: "Universidade de Brasília - Gama",
-        availableSeats: 2,
-        notes: null,
-        idCar: 6,
-        idUser: 6,
-        course: "Engenharia de software"
-      }
-    ];
+    setupInterceptors();
+    const rides = [];
     this.state = {
       rides,
       filteredRides: rides,
       isFiltered: false
     };
+  }
+
+  componentDidMount() {
+    Axios.get(rideRoute).then(response => {
+      if (response.status === 200) {
+        console.log("porran");
+        this.setState({
+          rides: response.data.data,
+          filteredRides: response.data.data
+        });
+      }
+    });
   }
 
   setModalVisible(modalVisible) {
@@ -137,7 +86,7 @@ class RideList extends Component {
 
   render() {
     // const { Option } = Select;
-
+    console.log(this.state.rides);
     return (
       <>
         <h1>Caronas disponíveis</h1>
@@ -195,7 +144,7 @@ class RideList extends Component {
                       <h4>
                         {item.location} - {item.origin}
                       </h4>
-                      <h5>{item.idUser} (userID)</h5>
+                      <h5>{item.user.name}</h5>
                     </>
                   }
                 />

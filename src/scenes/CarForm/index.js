@@ -15,7 +15,15 @@ class CarForm extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.createCar(values, this.createCarCallback.bind(this));
+        //this.props.createCar(values, this.createCarCallback.bind(this));
+        console.log("Valores recebidos do formulário do carro: ", values);
+        const requisicao = {
+          plate: values.plate,
+          color: values.color,
+          year: values.year,
+          model: values.model
+        };
+        console.log("Requisição ", requisicao);
       }
     });
   };

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Spin } from "antd";
+import { Spin, Button, Col } from "antd";
 import { connect } from "react-redux";
+import CarForm from "../CarForm";
 
 class Profile extends Component {
   render() {
@@ -11,7 +12,17 @@ class Profile extends Component {
             <Spin tip="Carregando..." />
           </div>
         ) : (
-          <h1>Bem vindo(a), {this.props.user.name}</h1>
+          <>
+            <h1>Bem vindo(a), {this.props.user.name}</h1>
+            <Col span={4}>
+              <Button type="primary" className="btn-form">
+                ADICIONAR CARRO
+              </Button>
+            </Col>
+            <Col span={20}>
+              <CarForm />
+            </Col>
+          </>
         )}
       </div>
     );
