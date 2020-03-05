@@ -8,7 +8,7 @@ import {
   rideRoute,
   carRoute
 } from "../../../../constants/apiRoutes";
-import { FETCH_USER, LOGOUT_USER } from "./types";
+import { FETCH_USER, LOGOUT_USER, FETCH_CAR } from "./types";
 
 setupInterceptors();
 
@@ -94,8 +94,8 @@ export function createCar(values, callback) {
     Axios.post(carRoute, values)
       .then(response => {
         if (response.status === 201) {
-          // dispatch({ type: FETCH_CAR, payload: response.data.data });
-          // callback(true);
+          dispatch({ type: FETCH_CAR, payload: response.data.data });
+          callback(true);
         }
       })
       .catch(() => {
