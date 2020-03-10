@@ -33,7 +33,7 @@ class CarForm extends Component {
     success
       ? this.setState({ redirect: true })
       : notification.open({
-          message: "Erro ao adicionar carro",
+          message: "Carro adicionado com sucesso",
           description: "Não foi possível adicionar o carro.",
           style: {
             width: 600,

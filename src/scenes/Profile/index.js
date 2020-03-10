@@ -1,9 +1,14 @@
 import React, { Component } from "react";
-import { Spin, Button, Col } from "antd";
+import { Spin, Col } from "antd";
 import { connect } from "react-redux";
 import CarForm from "../CarForm";
 
 class Profile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { loading: true, redirect: false, cars: [] };
+  }
+
   render() {
     return (
       <div className="App">
@@ -15,11 +20,13 @@ class Profile extends Component {
           <>
             <h1>Bem vindo(a), {this.props.user.name}</h1>
             <Col span={4}>
-              <Button type="primary" className="btn-form">
-                ADICIONAR CARRO
-              </Button>
+              <ul>
+                {this.state.cars.map(item => (
+                  <li key={item.idCar}>{item.model}</li>
+                ))}
+              </ul>
             </Col>
-            <Col span={20}>
+            <Col>
               <CarForm />
             </Col>
           </>
@@ -31,7 +38,8 @@ class Profile extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    cars: state.cars
   };
 };
 

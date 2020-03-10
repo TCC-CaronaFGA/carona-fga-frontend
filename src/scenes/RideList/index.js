@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Row, Col, List, Icon, Modal, Button } from "antd";
+import { Form, Row, Col, List, Icon, Modal, Button, InputNumber } from "antd";
 import "./styles.scss";
 import Search from "antd/lib/input/Search";
 import { setupInterceptors } from "../../auth/SetupInterceptors";
@@ -21,7 +21,6 @@ class RideList extends Component {
   componentDidMount() {
     Axios.get(rideRoute).then(response => {
       if (response.status === 200) {
-        console.log("porran");
         this.setState({
           rides: response.data.data,
           filteredRides: response.data.data
@@ -32,6 +31,10 @@ class RideList extends Component {
 
   setModalVisible(modalVisible) {
     this.setState({ modalVisible });
+  }
+
+  requestRide() {
+    console.log(this.props.requestedSeats);
   }
 
   LOCATIONS = [
@@ -131,8 +134,8 @@ class RideList extends Component {
           itemLayout="horizontal"
           locale={{ emptyText: "Nenhuma carona encontrada." }}
         >
-          {this.state.filteredRides.map(item => (
-            <List.Item>
+          {this.state.filteredRides.map((item, i) => (
+            <List.Item key={i}>
               <Col span={3}>
                 <Icon type="car" />
               </Col>
@@ -165,12 +168,19 @@ class RideList extends Component {
                 visible={this.state.modalVisible}
                 okText="Solicitar carona"
                 cancelText="Fechar"
-                onOk={() => this.setModalVisible(false)}
+                onOk={() => this.requestRide(this.props.requestedSeats)}
                 onCancel={() => this.setModalVisible(false)}
               >
-                <p>some contents...</p>
-                <p>some contents...</p>
-                <p>some contents...</p>
+                <p>{item.dtRide}</p>
+                <p>Origem: {item.origin}</p>
+                <p>Destino: {item.location}</p>
+                <p>
+                  {item.user.name} - {item.user.course} - {item.user.phone}
+                </p>
+                <Form onSubmit={e => e.preventDefault()}>
+                  Solicitar assento(s):{" "}
+                  <InputNumber name="requestedSeats" min={1} max={4} />
+                </Form>
               </Modal>
             </List.Item>
           ))}

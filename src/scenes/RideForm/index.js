@@ -21,7 +21,7 @@ import Axios from "axios";
 import { setupInterceptors } from "../../auth/SetupInterceptors";
 
 function onChange(value) {
-  console.log("changed", value);
+  // console.log("changed", value);
 }
 
 class RideForm extends Component {
@@ -105,13 +105,13 @@ class RideForm extends Component {
           .then(response => {
             if (response.status === 200) {
               notification.open({
-                message: "carona criada"
+                message: "Carona criada com sucesso!"
               });
             }
           })
           .catch(() => {
             notification.open({
-              message: "falha ao criar carona"
+              message: "Falha ao criar carona."
             });
           });
       }
