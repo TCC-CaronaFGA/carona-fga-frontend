@@ -9,27 +9,46 @@ import {
   TimePicker,
   InputNumber,
   Switch,
-  Button
+  Button,
+  notification
 } from "antd";
 import "./styles.scss";
 import TextArea from "antd/lib/input/TextArea";
 import { createRide } from "../../shared/LayoutApp/_/actions";
 import { connect } from "react-redux";
+import { carRoute, rideRoute } from "../../constants/apiRoutes";
+import Axios from "axios";
+import { setupInterceptors } from "../../auth/SetupInterceptors";
 
 function onChange(value) {
-  console.log("changed", value);
+  // console.log("changed", value);
 }
 
 class RideForm extends Component {
   constructor(props) {
     super(props);
     console.log("rideProps", props);
-    this.state = { loading: true, redirect: false };
+    this.state = { loading: true, redirect: false, cars: [] };
+    setupInterceptors();
+  }
+
+  componentDidMount() {
+    Axios.get(carRoute)
+      .then(response => {
+        if (response.status === 200) {
+          this.setState({ cars: response.data.data });
+        }
+      })
+      .catch(() => {
+        notification.open({ message: "falha ao recuperar lista de carros" });
+      });
   }
 
   state = {
     fga: false
   };
+
+  addressFGA = "Universidade de Brasília - Gama, Gama Leste, Brasília";
 
   LOCATIONS = [
     "Ceilândia",
@@ -74,12 +93,27 @@ class RideForm extends Component {
           location: values.location,
           origin: values.origin,
           destiny: values.destiny,
-          date: values.date._d,
-          time: values.time._i,
+          dtRide:
+            values.date.format("YYYY-MM-DD") +
+            " " +
+            values.time.format("hh:mm"),
           availableSeats: values.availableSeats,
-          notes: values.notes
+          notes: values.notes,
+          idCar: values.car
         };
-        console.log("Requisição ", requisicao);
+        Axios.post(rideRoute, requisicao)
+          .then(response => {
+            if (response.status === 200) {
+              notification.open({
+                message: "Carona criada com sucesso!"
+              });
+            }
+          })
+          .catch(() => {
+            notification.open({
+              message: "Falha ao criar carona."
+            });
+          });
       }
     });
   };
@@ -89,13 +123,16 @@ class RideForm extends Component {
     this.setState({
       fga: isGoing
     });
+    this.props.form.setFieldsValue({
+      origin: isGoing ? this.addressFGA : "",
+      destiny: isGoing ? "" : this.addressFGA
+    });
   };
 
   render() {
+    // console.log(this.props.form);
     const { getFieldDecorator } = this.props.form;
-    const addressFGA = "Universidade de Brasília - Gama, Gama Leste, Brasília";
     const { Option } = Select;
-    const format = "HH:mm";
     return (
       <>
         <div className="section">
@@ -116,6 +153,26 @@ class RideForm extends Component {
                 </Col>
               </Row>
               <Form onSubmit={this.handleSubmit}>
+                <Form.Item label="Carro" hasFeedback>
+                  {getFieldDecorator("car", {
+                    rules: [
+                      {
+                        required: true,
+                        message: "Selecione o carro."
+                      }
+                    ]
+                  })(
+                    <Select name="car" placeholder="Selecione um carro">
+                      {this.state.cars.map(item => {
+                        return (
+                          <Option value={item.idCar} key={item.idCar}>
+                            {`${item.model} ${item.color} `}
+                          </Option>
+                        );
+                      })}
+                    </Select>
+                  )}
+                </Form.Item>
                 <Form.Item label="Região" hasFeedback>
                   {getFieldDecorator("location", {
                     rules: [
@@ -137,18 +194,24 @@ class RideForm extends Component {
                   )}
                 </Form.Item>
                 <Form.Item label="Origem">
-                  <Input
-                    name="origin"
-                    placeholder="Indique o endereço"
-                    value={this.state.fga ? addressFGA : ""}
-                  />
+                  {getFieldDecorator("origin", {
+                    rules: [
+                      {
+                        required: true,
+                        message: "Insira a origem."
+                      }
+                    ]
+                  })(<Input placeholder="Indique o endereço" />)}
                 </Form.Item>
                 <Form.Item label="Destino">
-                  <Input
-                    name="destiny"
-                    placeholder="Destino"
-                    value={this.state.fga ? "" : addressFGA}
-                  />
+                  {getFieldDecorator("destiny", {
+                    rules: [
+                      {
+                        required: true,
+                        message: "Insira o destino."
+                      }
+                    ]
+                  })(<Input placeholder="Destino" />)}
                 </Form.Item>
                 <Row gutter={24}>
                   <Col span={8}>
@@ -191,7 +254,7 @@ class RideForm extends Component {
                           }
                         ]
                       })(
-                        <TimePicker placeholder="08:00" format="hh:mm" />
+                        <TimePicker placeholder="08:00" />
                         // <Input type="time"/>
                       )}
                     </Form.Item>

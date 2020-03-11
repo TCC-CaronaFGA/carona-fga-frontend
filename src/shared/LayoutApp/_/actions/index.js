@@ -5,10 +5,10 @@ import {
   authStatusRoute,
   logoutRoute,
   registerRoute,
-  createRideRoute,
-  createCarRoute
+  rideRoute,
+  carRoute
 } from "../../../../constants/apiRoutes";
-import { FETCH_USER, LOGOUT_USER } from "./types";
+import { FETCH_USER, LOGOUT_USER, FETCH_CAR } from "./types";
 
 setupInterceptors();
 
@@ -76,7 +76,7 @@ export function checkLogin(callback) {
 
 export function createRide(values, callback) {
   return dispatch => {
-    Axios.post(createRideRoute, values)
+    Axios.post(rideRoute, values)
       .then(response => {
         if (response.status === 201) {
           // dispatch({ type: FETCH_RIDE, payload: response.data.data });
@@ -91,11 +91,11 @@ export function createRide(values, callback) {
 
 export function createCar(values, callback) {
   return dispatch => {
-    Axios.post(createCarRoute, values)
+    Axios.post(carRoute, values)
       .then(response => {
         if (response.status === 201) {
-          // dispatch({ type: FETCH_CAR, payload: response.data.data });
-          // callback(true);
+          dispatch({ type: FETCH_CAR, payload: response.data.data });
+          callback(true);
         }
       })
       .catch(() => {
