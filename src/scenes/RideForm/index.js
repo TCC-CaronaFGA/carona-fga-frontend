@@ -254,7 +254,8 @@ class RideForm extends Component {
                           }
                         ]
                       })(
-                        <TimePicker placeholder="08:00" />
+                        <TimePicker placeholder="08:00" format="HH:mm" />
+
                         // <Input type="time"/>
                       )}
                     </Form.Item>

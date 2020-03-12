@@ -2,10 +2,18 @@
 @import "../../shared/LayoutApp/styles.scss";
 
 .ant-table-wrapper {
-    padding: 32px;
-}
-
-.ant-table-tbody > tr {
-    background-color: $comet;
-    color: $alto;
+	padding: 5% 20%;
+	.ant-table-tbody > tr {
+		background-color: $comet;
+		color: $alto;
+	
+		&:hover {
+			background-color: $comet;
+		}
+	}
+	.ant-table-thead > tr > th .ant-table-column-sorter .ant-table-column-sorter-inner .ant-table-column-sorter-up.on, 
+	.ant-table-thead > tr > th .ant-table-column-sorter .ant-table-column-sorter-inner .ant-table-column-sorter-down.on,
+	.ant-table-thead > tr > th .ant-table-column-sorter .ant-table-column-sorter-inner {
+		color: transparent;
+	}
 }
