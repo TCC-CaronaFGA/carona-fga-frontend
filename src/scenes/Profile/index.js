@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Spin, Col } from "antd";
+import { Spin, Col, Row, Icon } from "antd";
 import { connect } from "react-redux";
 import CarForm from "../CarForm";
+import "./styles.scss";
 
 class Profile extends Component {
   constructor(props) {
@@ -18,17 +19,42 @@ class Profile extends Component {
           </div>
         ) : (
           <>
-            <h1>Bem vindo(a), {this.props.user.name}</h1>
-            <Col span={4}>
-              <ul>
-                {this.state.cars.map(item => (
-                  <li key={item.idCar}>{item.model}</li>
-                ))}
-              </ul>
-            </Col>
-            <Col>
-              <CarForm />
-            </Col>
+            <Row>
+              <h1>Bem vindo(a), {this.props.user.name}</h1>
+              <Col span={8}>
+                <Row>
+                  <div className="profile-details info">
+                    <h2>
+                      Informações pessoais <Icon type="user" />
+                    </h2>
+                    <h3>{this.props.user.course}</h3>
+                    <h3>{this.props.user.phone}</h3>
+                    <h3>{this.props.user.email}</h3>
+                    <h3>
+                      {this.props.user.userType === "D"
+                        ? "Motorista"
+                        : "Passageiro"}
+                    </h3>
+                  </div>
+                </Row>
+                <Row>
+                  <div className="profile-details">
+                    <h2>
+                      Meu carro <Icon type="car" />
+                    </h2>
+
+                    <ul>
+                      {this.state.cars.map(item => (
+                        <li key={item.idCar}>{item.model}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </Row>
+              </Col>
+              <Col>
+                <CarForm />
+              </Col>
+            </Row>
           </>
         )}
       </div>
