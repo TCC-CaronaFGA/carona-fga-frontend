@@ -4,34 +4,41 @@ import { connect } from "react-redux";
 import "./styles.scss";
 
 class Ranking extends Component {
-  dataSource = [
+  data = [
     {
+      key: "1",
       name: "Vinicius",
       qtdRides: 1
     },
     {
+      key: "2",
       name: "Ana",
       qtdRides: 10
     },
     {
+      key: "3",
       name: "Gabriel",
       qtdRides: 4
     },
     {
+      key: "4",
       name: "Guilherme",
       qtdRides: 6
     },
     {
+      key: "5",
       name: "Camila",
-      qtdRides: 1
-    },
-    {
-      name: "Julia",
       qtdRides: 9
     },
     {
+      key: "6",
+      name: "Julia",
+      qtdRides: 1
+    },
+    {
+      key: "7",
       name: "Rafael",
-      qtdRides: 5
+      qtdRides: 8
     }
   ];
 
@@ -43,13 +50,13 @@ class Ranking extends Component {
     },
     {
       title: "Nome",
-      dataIndex: "name",
-      key: "name"
+      dataIndex: "name"
     },
     {
       title: "Caronas",
       dataIndex: "qtdRides",
-      key: "qtdRides"
+      defaultSortOrder: "descend",
+      sorter: (a, b) => a.qtdRides - b.qtdRides
     }
   ];
 
@@ -81,12 +88,21 @@ class Ranking extends Component {
                 );
               })}
             </List> */}
-            <Table dataSource={this.dataSource} columns={this.columns} />;
+            <Table
+              dataSource={this.data}
+              columns={this.columns}
+              onChange={onChange}
+            />
+            ;
           </>
         )}
       </div>
     );
   }
+}
+
+function onChange(pagination, filters, sorter, extra) {
+  console.log("params", pagination, filters, sorter, extra);
 }
 
 const mapStateToProps = state => {
