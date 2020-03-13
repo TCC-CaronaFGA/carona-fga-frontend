@@ -1,13 +1,27 @@
 import React, { Component } from "react";
-import { Spin, Col, Row, Icon } from "antd";
+import { Spin, Col, Row, Icon, notification } from "antd";
 import { connect } from "react-redux";
 import CarForm from "../CarForm";
 import "./styles.scss";
+import Axios from "axios";
+import { carRoute } from "../../constants/apiRoutes";
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = { loading: true, redirect: false, cars: [] };
+  }
+
+  componentDidMount() {
+    Axios.get(carRoute)
+      .then(response => {
+        if (response.status === 200) {
+          this.setState({ cars: response.data.data });
+        }
+      })
+      .catch(() => {
+        notification.open({ message: "Falha ao recuperar lista de carros" });
+      });
   }
 
   render() {
