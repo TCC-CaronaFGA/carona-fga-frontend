@@ -11,4 +11,6 @@ export const logoutRoute = baseURL + "/auth/logout";
 export const authStatusRoute = baseURL + "/auth/status";
 export const rideRoute = baseURL + "/rides";
 export const carRoute = baseURL + "/cars";
-export const solicitRideRoute = baseURL + "/rides";
+export const solicitRideRoute = function (rideID) {
+  return baseURL + "/rides/" + rideID;
+};

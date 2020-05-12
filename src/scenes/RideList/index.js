@@ -8,7 +8,7 @@ import {
   Modal,
   Button,
   InputNumber,
-  notification
+  notification,
 } from "antd";
 import "./styles.scss";
 import Search from "antd/lib/input/Search";
@@ -26,16 +26,16 @@ class RideList extends Component {
     this.state = {
       rides,
       filteredRides: rides,
-      isFiltered: false
+      isFiltered: false,
     };
   }
 
   componentDidMount() {
-    Axios.get(rideRoute).then(response => {
+    Axios.get(rideRoute).then((response) => {
       if (response.status === 200) {
         this.setState({
           rides: response.data.data,
-          filteredRides: response.data.data
+          filteredRides: response.data.data,
         });
       }
     });
@@ -46,7 +46,7 @@ class RideList extends Component {
   }
 
   requestRide() {
-    console.log(this.props.requestedSeats);
+    console.log(this.props);
   }
 
   LOCATIONS = [
@@ -80,40 +80,35 @@ class RideList extends Component {
     "Candangolândia",
     "Varjão",
     "Fercal",
-    "SIA"
+    "SIA",
   ];
 
-  filterList = event => {
+  filterList = (event) => {
     const value = event.target.value;
     const rides = this.state.rides;
     if (value.length >= 1) {
-      let filteredRides = rides.filter(ride => {
+      let filteredRides = rides.filter((ride) => {
         return ride.location.toLowerCase().indexOf(value.toLowerCase()) !== -1;
       });
       this.setState({ filteredRides, isFiltered: true });
     } else {
       this.setState({
         filteredRides: rides,
-        isFiltered: false
+        isFiltered: false,
       });
     }
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        this.props.solicitRide(values, () => this.solicitRideCallback());
-      }
-    });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
+  handleSubmit = (e, rideId) => {
+    e && e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         //this.props.solicitRide(values, () => this.solicitRideCallback());
-        this.props.solicitRide(values, this.solicitRideCallback.bind(this));
+        this.props.solicitRide(
+          values,
+          rideId,
+          this.solicitRideCallback.bind(this)
+        );
         console.log(
           "Valores recebidos do formulário da solicitaçao da carona: ",
           values
@@ -122,14 +117,14 @@ class RideList extends Component {
           dtRide: values.dtRide,
           origin: values.origin,
           location: values.location,
-          requestedSeats: values.requestedSeats
+          requestedSeats: values.requestedSeats,
         };
         console.log("Requisição ", requisicao);
       }
     });
   };
 
-  solicitRideCallback = success => {
+  solicitRideCallback = (success) => {
     success
       ? this.setState({ redirect: true })
       : notification.open({
@@ -137,8 +132,8 @@ class RideList extends Component {
           description: "",
           style: {
             width: 600,
-            marginLeft: 335 - 600
-          }
+            marginLeft: 335 - 600,
+          },
         });
   };
 
@@ -185,7 +180,7 @@ class RideList extends Component {
             md: 2,
             lg: 3,
             xl: 3,
-            xxl: 3
+            xxl: 3,
           }}
           itemLayout="horizontal"
           locale={{ emptyText: "Nenhuma carona encontrada." }}
@@ -224,19 +219,13 @@ class RideList extends Component {
                 visible={this.state.modalVisible}
                 okText="Solicitar carona"
                 cancelText="Fechar"
-                onOk={() => this.requestRide(this.props.requestedSeats)}
+                onOk={() => this.handleSubmit(null, item.idRide)}
                 onCancel={() => this.setModalVisible(false)}
               >
                 <Form onSubmit={this.handleSubmit}>
-                  <Form.Item label="Data e horário">
-                    {getFieldDecorator("dtRide")(<p>{item.dtRide}</p>)}
-                  </Form.Item>
-                  <Form.Item label="Origem">
-                    {getFieldDecorator("origin")(<p>{item.origin}</p>)}
-                  </Form.Item>
-                  <Form.Item label="Destino">
-                    {getFieldDecorator("location")(<p>{item.location}</p>)}
-                  </Form.Item>
+                  <p>{item.dtRide}</p>
+                  <p>{item.origin}</p>
+                  <p>{item.location}</p>
                   <p>
                     {item.user.name} - {item.user.course} - {item.user.phone}
                   </p>
