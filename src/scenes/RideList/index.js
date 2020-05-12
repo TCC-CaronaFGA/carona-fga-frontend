@@ -1,10 +1,22 @@
 import React, { Component } from "react";
-import { Form, Row, Col, List, Icon, Modal, Button, InputNumber } from "antd";
+import {
+  Form,
+  Row,
+  Col,
+  List,
+  Icon,
+  Modal,
+  Button,
+  InputNumber,
+  notification
+} from "antd";
 import "./styles.scss";
 import Search from "antd/lib/input/Search";
 import { setupInterceptors } from "../../auth/SetupInterceptors";
 import Axios from "axios";
 import { rideRoute } from "../../constants/apiRoutes";
+import { connect } from "react-redux";
+import { solicitRide } from "../../shared/LayoutApp/_/actions";
 
 class RideList extends Component {
   constructor(props) {
@@ -87,9 +99,53 @@ class RideList extends Component {
     }
   };
 
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        this.props.solicitRide(values, () => this.solicitRideCallback());
+      }
+    });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        //this.props.solicitRide(values, () => this.solicitRideCallback());
+        this.props.solicitRide(values, this.solicitRideCallback.bind(this));
+        console.log(
+          "Valores recebidos do formulário da solicitaçao da carona: ",
+          values
+        );
+        const requisicao = {
+          dtRide: values.dtRide,
+          origin: values.origin,
+          location: values.location,
+          requestedSeats: values.requestedSeats
+        };
+        console.log("Requisição ", requisicao);
+      }
+    });
+  };
+
+  solicitRideCallback = success => {
+    success
+      ? this.setState({ redirect: true })
+      : notification.open({
+          message: "Carona solicitada com sucesso!",
+          description: "",
+          style: {
+            width: 600,
+            marginLeft: 335 - 600
+          }
+        });
+  };
+
   render() {
+    const { getFieldDecorator } = this.props.form;
     // const { Option } = Select;
-    console.log(this.state.rides);
+    // console.log(this.state.rides);
     return (
       <>
         <h1>Caronas disponíveis</h1>
@@ -163,7 +219,7 @@ class RideList extends Component {
               </Button>
               <Modal
                 className="modal"
-                title="Informações da carona"
+                title="teste"
                 centered
                 visible={this.state.modalVisible}
                 okText="Solicitar carona"
@@ -171,15 +227,25 @@ class RideList extends Component {
                 onOk={() => this.requestRide(this.props.requestedSeats)}
                 onCancel={() => this.setModalVisible(false)}
               >
-                <p>{item.dtRide}</p>
-                <p>Origem: {item.origin}</p>
-                <p>Destino: {item.location}</p>
-                <p>
-                  {item.user.name} - {item.user.course} - {item.user.phone}
-                </p>
-                <Form onSubmit={e => e.preventDefault()}>
+                <Form onSubmit={this.handleSubmit}>
+                  <Form.Item label="Data e horário">
+                    {getFieldDecorator("dtRide")(<p>{item.dtRide}</p>)}
+                  </Form.Item>
+                  <Form.Item label="Origem">
+                    {getFieldDecorator("origin")(<p>{item.origin}</p>)}
+                  </Form.Item>
+                  <Form.Item label="Destino">
+                    {getFieldDecorator("location")(<p>{item.location}</p>)}
+                  </Form.Item>
+                  <p>
+                    {item.user.name} - {item.user.course} - {item.user.phone}
+                  </p>
                   Solicitar assento(s):{" "}
-                  <InputNumber name="requestedSeats" min={1} max={4} />
+                  <Form.Item label="Assentos solicitados">
+                    {getFieldDecorator("requestedSeats")(
+                      <InputNumber name="requestedSeats" min={1} max={4} />
+                    )}
+                  </Form.Item>
                 </Form>
               </Modal>
             </List.Item>
@@ -190,4 +256,6 @@ class RideList extends Component {
   }
 }
 
-export default RideList;
+export default Form.create({ name: "solicitRideForm" })(
+  connect(null, { solicitRide })(RideList)
+);
