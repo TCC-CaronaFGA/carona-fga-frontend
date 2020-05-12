@@ -54,6 +54,9 @@ h1 {
 }
 
 .modal {
+  .ant-modal-content, .ant-modal-header {
+    border-radius: 10px;
+  }
   .ant-btn {
     width: auto;
     background-color: transparent !important;
@@ -71,5 +74,12 @@ h1 {
   p {
     padding: 8px 16px;
     color: $ebony;
+  }
+  h4 {
+    color: $gigas;
+  }
+  h5 {
+    color: $ebony;
+    padding-bottom: 15px;
   }
 } 
