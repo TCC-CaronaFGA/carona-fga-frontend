@@ -14,3 +14,7 @@ export const carRoute = baseURL + "/cars";
 export const solicitRideRoute = function (rideID) {
   return baseURL + "/rides/" + rideID;
 };
+
+export const answerSolicitationRoute = function (rideID, answer) {
+  return baseURL + "/requests/" + rideID + "/" + answer;
+};

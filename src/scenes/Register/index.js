@@ -7,7 +7,7 @@ import {
   Radio,
   Row,
   Col,
-  notification
+  notification,
 } from "antd";
 import { setupInterceptors } from "../../auth/SetupInterceptors";
 import { Redirect } from "react-router-dom";
@@ -24,34 +24,44 @@ class Register extends Component {
     "Engenharia Automotiva",
     "Engenharia Eletrònica",
     "Engenharia de Energia",
-    "Engenharia de Software"
+    "Engenharia de Software",
   ];
 
   constructor(props) {
     super(props);
     console.log("registerProps", props);
-    this.state = { loading: true, redirect: false };
+    this.state = { loading: true, redirect: Object.keys(props.user) > 0 };
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        this.props.register(values, () => this.registerCallback());
+        this.props.register(values, (success) =>
+          this.registerCallback(success)
+        );
       }
     });
   };
 
-  registerCallback = success => {
+  registerCallback = (success) => {
     success
-      ? this.setState({ redirect: true })
-      : notification.open({
+      ? this.setState({ redirect: true }) &&
+        notification.open({
           message: "Usuário criado com sucesso!",
           description: "",
           style: {
             width: 600,
-            marginLeft: 335 - 600
-          }
+            marginLeft: 335 - 600,
+          },
+        })
+      : notification.open({
+          message: "Não foi possível criar o usuário!",
+          description: "",
+          style: {
+            width: 600,
+            marginLeft: 335 - 600,
+          },
         });
   };
 
@@ -87,9 +97,9 @@ class Register extends Component {
                 rules: [
                   {
                     required: true,
-                    message: "Insira seu nome."
-                  }
-                ]
+                    message: "Insira seu nome.",
+                  },
+                ],
               })(<Input minLength="3" />)}
             </Form.Item>
             <Form.Item label="E-mail">
@@ -97,13 +107,13 @@ class Register extends Component {
                 rules: [
                   {
                     type: "email",
-                    message: "Insira um e-mail válido."
+                    message: "Insira um e-mail válido.",
                   },
                   {
                     required: true,
-                    message: "Insira seu e-mail."
-                  }
-                ]
+                    message: "Insira seu e-mail.",
+                  },
+                ],
               })(<Input />)}
             </Form.Item>
             <Row gutter={24}>
@@ -113,9 +123,9 @@ class Register extends Component {
                     rules: [
                       {
                         required: true,
-                        message: "Selecione seu curso."
-                      }
-                    ]
+                        message: "Selecione seu curso.",
+                      },
+                    ],
                   })(
                     <Select placeholder="Selecione um curso">
                       {this.COURSES.map((item, i) => {
@@ -135,9 +145,9 @@ class Register extends Component {
                     rules: [
                       {
                         required: true,
-                        message: "Selecione o tipo."
-                      }
-                    ]
+                        message: "Selecione o tipo.",
+                      },
+                    ],
                   })(
                     <Radio.Group>
                       <Radio value={"D"}>Motorista</Radio>
@@ -151,7 +161,9 @@ class Register extends Component {
               <Col span={12}>
                 <Form.Item label="Celular">
                   {getFieldDecorator("phone", {
-                    rules: [{ required: true, message: "Insira seu telefone." }]
+                    rules: [
+                      { required: true, message: "Insira seu telefone." },
+                    ],
                   })(<Input maxLength="11" />)}
                 </Form.Item>
               </Col>
@@ -161,9 +173,9 @@ class Register extends Component {
                     rules: [
                       {
                         required: true,
-                        message: "Selecione seu gênero."
-                      }
-                    ]
+                        message: "Selecione seu gênero.",
+                      },
+                    ],
                   })(
                     <Radio.Group>
                       <Radio value={"F"}>Feminino</Radio>
@@ -180,12 +192,12 @@ class Register extends Component {
                     rules: [
                       {
                         required: true,
-                        message: "Insira sua senha."
+                        message: "Insira sua senha.",
                       },
                       {
-                        validator: this.validateToNextPassword
-                      }
-                    ]
+                        validator: this.validateToNextPassword,
+                      },
+                    ],
                   })(<Input.Password />)}
                 </Form.Item>
               </Col>
@@ -195,12 +207,12 @@ class Register extends Component {
                     rules: [
                       {
                         required: true,
-                        message: "Confira sua senha."
+                        message: "Confira sua senha.",
                       },
                       {
-                        validator: this.compareToFirstPassword
-                      }
-                    ]
+                        validator: this.compareToFirstPassword,
+                      },
+                    ],
                   })(<Input.Password onBlur={this.handleConfirmBlur} />)}
                 </Form.Item>
               </Col>
@@ -217,6 +229,12 @@ class Register extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
 export default Form.create({ name: "registerForm" })(
-  connect(null, { register })(Register)
+  connect(mapStateToProps, { register })(Register)
 );

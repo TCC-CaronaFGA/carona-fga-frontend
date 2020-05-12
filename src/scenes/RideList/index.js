@@ -125,19 +125,30 @@ class RideList extends Component {
   };
 
   solicitRideCallback = (success) => {
-    success
-      ? this.setState({ redirect: true })
-      : notification.open({
-          message: "Carona solicitada com sucesso!",
-          description: "",
-          style: {
-            width: 600,
-            marginLeft: 335 - 600,
-          },
-        });
+    if (success) {
+      this.setState({ redirect: true });
+      notification.open({
+        message: "Carona solicitada com sucesso!",
+        description: "",
+        style: {
+          width: 600,
+          marginLeft: 335 - 600,
+        },
+      });
+    } else
+      notification.open({
+        message:
+          "Erro ao solicitar carona (Você inseriu o numero de assentos?)!",
+        description: "",
+        style: {
+          width: 600,
+          marginLeft: 335 - 600,
+        },
+      });
   };
 
   render() {
+    console.log(this.state.filteredRides);
     const { getFieldDecorator } = this.props.form;
     // const { Option } = Select;
     // console.log(this.state.rides);
@@ -217,9 +228,17 @@ class RideList extends Component {
                 title="teste"
                 centered
                 visible={this.state.modalVisible}
-                okText="Solicitar carona"
+                okText={
+                  item.idUser !== this.props.user.idUser
+                    ? "Solicitar carona"
+                    : null
+                }
                 cancelText="Fechar"
-                onOk={() => this.handleSubmit(null, item.idRide)}
+                onOk={() =>
+                  item.idUser !== this.props.user.idUser
+                    ? this.handleSubmit(null, item.idRide)
+                    : this.setModalVisible(false)
+                }
                 onCancel={() => this.setModalVisible(false)}
               >
                 <Form onSubmit={this.handleSubmit}>
@@ -229,12 +248,16 @@ class RideList extends Component {
                   <p>
                     {item.user.name} - {item.user.course} - {item.user.phone}
                   </p>
-                  Solicitar assento(s):{" "}
-                  <Form.Item label="Assentos solicitados">
-                    {getFieldDecorator("requestedSeats")(
-                      <InputNumber name="requestedSeats" min={1} max={4} />
-                    )}
-                  </Form.Item>
+                  {item.idUser !== this.props.user.idUser && (
+                    <>
+                      <p>Solicitar assento(s): </p>
+                      <Form.Item label="Assentos solicitados">
+                        {getFieldDecorator("requestedSeats")(
+                          <InputNumber name="requestedSeats" min={1} max={4} />
+                        )}
+                      </Form.Item>
+                    </>
+                  )}
                 </Form>
               </Modal>
             </List.Item>
@@ -245,6 +268,12 @@ class RideList extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
 export default Form.create({ name: "solicitRideForm" })(
-  connect(null, { solicitRide })(RideList)
+  connect(mapStateToProps, { solicitRide })(RideList)
 );

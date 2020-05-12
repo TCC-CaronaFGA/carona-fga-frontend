@@ -11,45 +11,46 @@ class Login extends Component {
   constructor(props) {
     super(props);
     //console.log("LoginProps", props);
-    this.state = { loading: true, redirect: false };
+    this.state = { loading: false, redirect: false };
   }
 
   componentDidMount() {
     const token = localStorage.getItem("auth_token");
+    console.log(token);
     if (token != null) {
-      this.props.checkLogin(this.loginCallback.bind(this));
+      this.props.checkLogin((answer) => this.loginCallback(answer));
     } else {
-      this.loginCallback(false);
+      this.loginCallback(false, false);
     }
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.setState({ loading: true });
-        this.props.login(values, this.loginCallback.bind(this));
+        this.props.login(values, (answer) => this.loginCallback(answer, false));
       }
     });
   };
 
-  loginCallback(didLogin) {
+  loginCallback(didLogin, showNotification = true) {
     if (didLogin) {
       this.setState({ redirect: true });
     } else {
-      this.setState({ loading: false });
-      notification.open({
-        message: "Erro interno",
-        description: "Não foi possível fazer o login",
-        style: {
-          width: 600,
-          marginLeft: 335 - 600
-        }
-      });
+      showNotification &&
+        notification.open({
+          message: "Erro interno",
+          description: "Não foi possível fazer o login",
+          style: {
+            width: 600,
+            marginLeft: 335 - 600,
+          },
+        });
     }
   }
 
   render() {
+    console.log(this.state);
     const { getFieldDecorator } = this.props.form;
     return (
       <div className="section">

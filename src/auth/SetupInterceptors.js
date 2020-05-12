@@ -2,31 +2,30 @@ import { history } from "../components/Routes";
 import Axios from "axios";
 
 export const setupInterceptors = () => {
-  
   Axios.interceptors.request.use(
-    config => {
+    (config) => {
       config = {
         ...config,
-        withCredentials: true
+        withCredentials: true,
       };
       config.headers = {
         ...config.headers,
         "content-type": "application/json",
-        "Authorization": 'Token ' + localStorage.getItem("auth_token")
+        Authorization: "Token " + localStorage.getItem("auth_token"),
       };
       return config;
     },
-    error =>
+    (error) =>
       // Do something with request error
       Promise.reject(error)
   );
 
   Axios.interceptors.response.use(
-    response => {
+    (response) => {
       if (response.data["auth_token"]) {
         persistAuthHeadersInDeviceStorage(response.data);
       }
-      if (response.data["message"] === "Successfully logged out."){
+      if (response.data["message"] === "Successfully logged out.") {
         localStorage.removeItem("auth_token");
       }
       return response;
@@ -36,7 +35,8 @@ export const setupInterceptors = () => {
       if (error.response) {
         if (error.response.status === 401) {
           localStorage.removeItem("auth_token");
-          onUnauthenticated();
+          error.request.responseURL.indexOf("/auth/login") === -1 &&
+            onUnauthenticated();
         }
       }
       return Promise.reject(error);
@@ -51,4 +51,3 @@ export const setupInterceptors = () => {
 export function onUnauthenticated() {
   history.push("/logout");
 }
-
