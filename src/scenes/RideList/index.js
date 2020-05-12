@@ -103,7 +103,7 @@ class RideList extends Component {
     e && e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        //this.props.solicitRide(values, () => this.solicitRideCallback());
+        this.props.solicitRide(values, () => this.solicitRideCallback());
         this.props.solicitRide(
           values,
           rideId,
@@ -152,6 +152,7 @@ class RideList extends Component {
     const { getFieldDecorator } = this.props.form;
     // const { Option } = Select;
     // console.log(this.state.rides);
+
     return (
       <>
         <h1>Caronas disponíveis</h1>
@@ -225,7 +226,7 @@ class RideList extends Component {
               </Button>
               <Modal
                 className="modal"
-                title="teste"
+                title="Informações da carona"
                 centered
                 visible={this.state.modalVisible}
                 okText={
@@ -233,7 +234,7 @@ class RideList extends Component {
                     ? "Solicitar carona"
                     : null
                 }
-                cancelText="Fechar"
+                cancelText="Cancelar"
                 onOk={() =>
                   item.idUser !== this.props.user.idUser
                     ? this.handleSubmit(null, item.idRide)
@@ -242,15 +243,19 @@ class RideList extends Component {
                 onCancel={() => this.setModalVisible(false)}
               >
                 <Form onSubmit={this.handleSubmit}>
-                  <p>{item.dtRide}</p>
-                  <p>{item.origin}</p>
-                  <p>{item.location}</p>
-                  <p>
+                  <h4>Quando?</h4>
+                  <h5>{item.dtRide}</h5>
+                  <h4>De onde?</h4>
+                  <h5>{item.origin}</h5>
+                  <h4>Para onde?</h4>
+                  <h5>{item.location}</h5>
+                  <h4>Com quem?</h4>
+                  <h5>
                     {item.user.name} - {item.user.course} - {item.user.phone}
-                  </p>
+                  </h5>
                   {item.idUser !== this.props.user.idUser && (
                     <>
-                      <p>Solicitar assento(s): </p>
+                      <h4>Assentos solicitados?</h4>
                       <Form.Item label="Assentos solicitados">
                         {getFieldDecorator("requestedSeats")(
                           <InputNumber name="requestedSeats" min={1} max={4} />

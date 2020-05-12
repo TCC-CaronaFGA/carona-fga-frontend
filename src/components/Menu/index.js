@@ -31,7 +31,7 @@ class Navigation extends Component {
               <Menu.Item key="1">
                 <Link to="/search-ride">
                   <Icon type="search" />
-                  Procurar
+                  Procurar carona
                 </Link>
               </Menu.Item>
               <Menu.Item key="2">
@@ -68,7 +68,7 @@ class Navigation extends Component {
                 <Menu.Item key="2">
                   <Link to="/search-ride">
                     <Icon type="search" />
-                    Procurar
+                    Procurar carona
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="3">
