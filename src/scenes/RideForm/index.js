@@ -19,6 +19,7 @@ import { connect } from "react-redux";
 import { carRoute, rideRoute } from "../../constants/apiRoutes";
 import Axios from "axios";
 import { setupInterceptors } from "../../auth/SetupInterceptors";
+import locale from "antd/es/date-picker/locale/pt_BR";
 
 function onChange(value) {
   // console.log("changed", value);
@@ -28,7 +29,7 @@ class RideForm extends Component {
   constructor(props) {
     super(props);
     console.log("rideProps", props);
-    this.state = { loading: true, redirect: false, cars: [] };
+    this.state = { loading: true, redirect: false, cars: [], fga: false };
     setupInterceptors();
   }
 
@@ -40,13 +41,12 @@ class RideForm extends Component {
         }
       })
       .catch(() => {
-        notification.open({ message: "falha ao recuperar lista de carros" });
+        notification.open({ message: "Falha ao recuperar lista de carros" });
       });
+    this.props.form.setFieldsValue({
+      destiny: this.addressFGA
+    });
   }
-
-  state = {
-    fga: false
-  };
 
   addressFGA = "Universidade de Brasília - Gama, Gama Leste, Brasília";
 
@@ -98,6 +98,7 @@ class RideForm extends Component {
             " " +
             values.time.format("hh:mm"),
           availableSeats: values.availableSeats,
+          cost: values.cost,
           notes: values.notes,
           idCar: values.car
         };
@@ -107,6 +108,7 @@ class RideForm extends Component {
               notification.open({
                 message: "Carona criada com sucesso!"
               });
+              this.props.history.push("/search-ride");
             }
           })
           .catch(() => {
@@ -128,6 +130,11 @@ class RideForm extends Component {
       destiny: isGoing ? "" : this.addressFGA
     });
   };
+
+  disabledDate(current) {
+    // Can not select days before today and today
+    return current.valueOf() < Date.now();
+  }
 
   render() {
     // console.log(this.props.form);
@@ -214,7 +221,7 @@ class RideForm extends Component {
                   })(<Input placeholder="Destino" />)}
                 </Form.Item>
                 <Row gutter={24}>
-                  <Col span={8}>
+                  <Col span={6}>
                     <Form.Item label="Data">
                       {getFieldDecorator("date", {
                         rules: [
@@ -227,6 +234,9 @@ class RideForm extends Component {
                         <DatePicker
                           placeholder="Selecione a data"
                           format="DD-MM-YYYY"
+                          minDate="0"
+                          locale={locale}
+                          disabledDate={this.disabledDate}
                           dateRender={current => {
                             const style = {};
                             if (current.date() === 1) {
@@ -243,7 +253,7 @@ class RideForm extends Component {
                       )}
                     </Form.Item>
                   </Col>
-                  <Col span={8}>
+                  <Col span={6}>
                     <Form.Item label="Horário">
                       {getFieldDecorator("time", {
                         rules: [
@@ -254,7 +264,11 @@ class RideForm extends Component {
                           }
                         ]
                       })(
-                        <TimePicker placeholder="08:00" format="HH:mm" />
+                        <TimePicker
+                          minuteStep={15}
+                          placeholder="08:00"
+                          format="HH:mm"
+                        />
 
                         // <Input type="time"/>
                       )}
@@ -265,7 +279,7 @@ class RideForm extends Component {
                         <DatePicker placeholder="Selecione a data" />
                       </Form.Item>
                   </Col> */}
-                  <Col span={8}>
+                  <Col span={6}>
                     <Form.Item label="Assentos disponíveis">
                       {getFieldDecorator("availableSeats", {
                         rules: [
@@ -285,12 +299,34 @@ class RideForm extends Component {
                       )}
                     </Form.Item>
                   </Col>
+                  <Col span={6}>
+                    <Form.Item label="Custo">
+                      {getFieldDecorator("cost", {
+                        rules: [
+                          {
+                            required: true,
+                            message: "Insira o custo sugerido para a carona."
+                          }
+                        ]
+                      })(
+                        <InputNumber
+                          placeholder="R$ 0,00"
+                          min={0}
+                          max={10}
+                          formatter={value =>
+                            `R$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                          }
+                          parser={value => value.replace(/\$\s?|(,*)/g, "")}
+                        />
+                      )}
+                    </Form.Item>
+                  </Col>
                 </Row>
                 <Form.Item label="Observações">
                   {getFieldDecorator("notes")(
                     <TextArea
                       name="notes"
-                      placeholder="Aqui você pode informar alguma restrição ou rota específica. É recomendado indicar o ponto de encontro com referências"
+                      placeholder="Aqui você pode informar alguma restrição ou rota específica. É recomendado indicar o ponto de encontro com referências."
                     />
                   )}
                 </Form.Item>

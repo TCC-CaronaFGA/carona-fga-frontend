@@ -3,13 +3,14 @@ import { Menu, Icon } from "antd";
 import { Link } from "react-router-dom";
 import "./styles.scss";
 import Sider from "antd/lib/layout/Sider";
+import { connect } from "react-redux";
 
 class Navigation extends Component {
   state = {
-    collapsed: false
+    collapsed: false,
   };
 
-  onCollapse = collapsed => {
+  onCollapse = (collapsed) => {
     console.log(collapsed);
     this.setState({ collapsed });
   };
@@ -30,7 +31,7 @@ class Navigation extends Component {
               <Menu.Item key="1">
                 <Link to="/search-ride">
                   <Icon type="search" />
-                  Procurar
+                  Procurar carona
                 </Link>
               </Menu.Item>
               <Menu.Item key="2">
@@ -54,7 +55,7 @@ class Navigation extends Component {
                 overflow: "auto",
                 height: "100vh",
                 position: "fixed",
-                left: 0
+                left: 0,
               }}
             >
               <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
@@ -67,7 +68,7 @@ class Navigation extends Component {
                 <Menu.Item key="2">
                   <Link to="/search-ride">
                     <Icon type="search" />
-                    Procurar
+                    Procurar carona
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="3">
@@ -85,7 +86,14 @@ class Navigation extends Component {
                 <Menu.Item key="5">
                   <Link to="/solicitations">
                     <Icon type="notification" />
-                    Solicitações
+                    Solicitações{" "}
+                    {this.props.user &&
+                      (this.props.user.notifications.length > 0 ||
+                        this.props.user.notificationsAnswer.length > 0) &&
+                      `(${Math.max(
+                        this.props.user.notifications.length,
+                        this.props.user.notificationsAnswer.length
+                      )})`}
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="6">
@@ -133,4 +141,10 @@ class Navigation extends Component {
   }
 }
 
-export default Navigation;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps)(Navigation);

@@ -1,10 +1,22 @@
 import React, { Component } from "react";
-import { Form, Row, Col, List, Icon, Modal, Button, InputNumber } from "antd";
+import {
+  Form,
+  Row,
+  Col,
+  List,
+  Icon,
+  Modal,
+  Button,
+  InputNumber,
+  notification,
+} from "antd";
 import "./styles.scss";
 import Search from "antd/lib/input/Search";
 import { setupInterceptors } from "../../auth/SetupInterceptors";
 import Axios from "axios";
 import { rideRoute } from "../../constants/apiRoutes";
+import { connect } from "react-redux";
+import { solicitRide } from "../../shared/LayoutApp/_/actions";
 
 class RideList extends Component {
   constructor(props) {
@@ -14,16 +26,16 @@ class RideList extends Component {
     this.state = {
       rides,
       filteredRides: rides,
-      isFiltered: false
+      isFiltered: false,
     };
   }
 
   componentDidMount() {
-    Axios.get(rideRoute).then(response => {
+    Axios.get(rideRoute).then((response) => {
       if (response.status === 200) {
         this.setState({
           rides: response.data.data,
-          filteredRides: response.data.data
+          filteredRides: response.data.data,
         });
       }
     });
@@ -34,7 +46,7 @@ class RideList extends Component {
   }
 
   requestRide() {
-    console.log(this.props.requestedSeats);
+    console.log(this.props);
   }
 
   LOCATIONS = [
@@ -68,28 +80,79 @@ class RideList extends Component {
     "Candangolândia",
     "Varjão",
     "Fercal",
-    "SIA"
+    "SIA",
   ];
 
-  filterList = event => {
+  filterList = (event) => {
     const value = event.target.value;
     const rides = this.state.rides;
     if (value.length >= 1) {
-      let filteredRides = rides.filter(ride => {
+      let filteredRides = rides.filter((ride) => {
         return ride.location.toLowerCase().indexOf(value.toLowerCase()) !== -1;
       });
       this.setState({ filteredRides, isFiltered: true });
     } else {
       this.setState({
         filteredRides: rides,
-        isFiltered: false
+        isFiltered: false,
       });
     }
   };
 
+  handleSubmit = (e, rideId) => {
+    e && e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        this.props.solicitRide(values, () => this.solicitRideCallback());
+        this.props.solicitRide(
+          values,
+          rideId,
+          this.solicitRideCallback.bind(this)
+        );
+        console.log(
+          "Valores recebidos do formulário da solicitaçao da carona: ",
+          values
+        );
+        const requisicao = {
+          dtRide: values.dtRide,
+          origin: values.origin,
+          location: values.location,
+          requestedSeats: values.requestedSeats,
+        };
+        console.log("Requisição ", requisicao);
+      }
+    });
+  };
+
+  solicitRideCallback = (success) => {
+    if (success) {
+      this.setState({ redirect: true });
+      notification.open({
+        message: "Carona solicitada com sucesso!",
+        description: "",
+        style: {
+          width: 600,
+          marginLeft: 335 - 600,
+        },
+      });
+    } else
+      notification.open({
+        message:
+          "Erro ao solicitar carona (Você inseriu o numero de assentos?)!",
+        description: "",
+        style: {
+          width: 600,
+          marginLeft: 335 - 600,
+        },
+      });
+  };
+
   render() {
+    console.log(this.state.filteredRides);
+    const { getFieldDecorator } = this.props.form;
     // const { Option } = Select;
-    console.log(this.state.rides);
+    // console.log(this.state.rides);
+
     return (
       <>
         <h1>Caronas disponíveis</h1>
@@ -129,7 +192,7 @@ class RideList extends Component {
             md: 2,
             lg: 3,
             xl: 3,
-            xxl: 3
+            xxl: 3,
           }}
           itemLayout="horizontal"
           locale={{ emptyText: "Nenhuma carona encontrada." }}
@@ -166,20 +229,40 @@ class RideList extends Component {
                 title="Informações da carona"
                 centered
                 visible={this.state.modalVisible}
-                okText="Solicitar carona"
-                cancelText="Fechar"
-                onOk={() => this.requestRide(this.props.requestedSeats)}
+                okText={
+                  item.idUser !== this.props.user.idUser
+                    ? "Solicitar carona"
+                    : null
+                }
+                cancelText="Cancelar"
+                onOk={() =>
+                  item.idUser !== this.props.user.idUser
+                    ? this.handleSubmit(null, item.idRide)
+                    : this.setModalVisible(false)
+                }
                 onCancel={() => this.setModalVisible(false)}
               >
-                <p>{item.dtRide}</p>
-                <p>Origem: {item.origin}</p>
-                <p>Destino: {item.location}</p>
-                <p>
-                  {item.user.name} - {item.user.course} - {item.user.phone}
-                </p>
-                <Form onSubmit={e => e.preventDefault()}>
-                  Solicitar assento(s):{" "}
-                  <InputNumber name="requestedSeats" min={1} max={4} />
+                <Form onSubmit={this.handleSubmit}>
+                  <h4>Quando?</h4>
+                  <h5>{item.dtRide}</h5>
+                  <h4>De onde?</h4>
+                  <h5>{item.origin}</h5>
+                  <h4>Para onde?</h4>
+                  <h5>{item.location}</h5>
+                  <h4>Com quem?</h4>
+                  <h5>
+                    {item.user.name} - {item.user.course} - {item.user.phone}
+                  </h5>
+                  {item.idUser !== this.props.user.idUser && (
+                    <>
+                      <h4>Assentos solicitados?</h4>
+                      <Form.Item label="Assentos solicitados">
+                        {getFieldDecorator("requestedSeats")(
+                          <InputNumber name="requestedSeats" min={1} max={4} />
+                        )}
+                      </Form.Item>
+                    </>
+                  )}
                 </Form>
               </Modal>
             </List.Item>
@@ -190,4 +273,12 @@ class RideList extends Component {
   }
 }
 
-export default RideList;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default Form.create({ name: "solicitRideForm" })(
+  connect(mapStateToProps, { solicitRide })(RideList)
+);

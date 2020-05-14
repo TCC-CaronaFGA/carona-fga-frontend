@@ -15,13 +15,12 @@ class LayoutApp extends Component {
   }
 
   componentDidMount() {
-    /*const token = localStorage.getItem("auth_token");
-    if(token != null){
+    const token = localStorage.getItem("auth_token");
+    if (token != null) {
       this.props.checkLogin(this.loginCallback.bind(this));
-    }
-    else {
+    } else {
       this.loginCallback(false);
-    }*/
+    }
   }
 
   componentDidUpdate(oldProps) {
@@ -78,9 +77,9 @@ class LayoutApp extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
   };
 };
 

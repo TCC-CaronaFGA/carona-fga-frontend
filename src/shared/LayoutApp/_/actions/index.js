@@ -6,16 +6,17 @@ import {
   logoutRoute,
   registerRoute,
   rideRoute,
-  carRoute
+  carRoute,
+  solicitRideRoute,
 } from "../../../../constants/apiRoutes";
 import { FETCH_USER, LOGOUT_USER, FETCH_CAR } from "./types";
 
 setupInterceptors();
 
 export function login(values, callback) {
-  return dispatch => {
+  return (dispatch) => {
     Axios.post(loginRoute, values)
-      .then(response => {
+      .then((response) => {
         if (response.status === 200) {
           dispatch({ type: FETCH_USER, payload: response.data.data });
           callback(true);
@@ -28,9 +29,9 @@ export function login(values, callback) {
 }
 
 export function register(values, callback) {
-  return dispatch => {
+  return (dispatch) => {
     Axios.post(registerRoute, values)
-      .then(response => {
+      .then((response) => {
         if (response.status === 201) {
           dispatch({ type: FETCH_USER, payload: response.data.data });
           callback(true);
@@ -43,9 +44,9 @@ export function register(values, callback) {
 }
 
 export function logout(callback) {
-  return dispatch => {
+  return (dispatch) => {
     Axios.get(logoutRoute)
-      .then(response => {
+      .then((response) => {
         if (response.status === 200) {
           dispatch({ type: LOGOUT_USER });
         }
@@ -58,9 +59,9 @@ export function logout(callback) {
 }
 
 export function checkLogin(callback) {
-  return dispatch => {
+  return (dispatch) => {
     Axios.get(authStatusRoute)
-      .then(response => {
+      .then((response) => {
         if (response.status === 200) {
           dispatch({ type: FETCH_USER, payload: response.data.data });
           callback(true);
@@ -68,16 +69,16 @@ export function checkLogin(callback) {
           callback(false);
         }
       })
-      .catch(error => {
+      .catch((error) => {
         callback(false);
       });
   };
 }
 
 export function createRide(values, callback) {
-  return dispatch => {
+  return (dispatch) => {
     Axios.post(rideRoute, values)
-      .then(response => {
+      .then((response) => {
         if (response.status === 201) {
           // dispatch({ type: FETCH_RIDE, payload: response.data.data });
           // callback(true);
@@ -90,11 +91,26 @@ export function createRide(values, callback) {
 }
 
 export function createCar(values, callback) {
-  return dispatch => {
+  return (dispatch) => {
     Axios.post(carRoute, values)
-      .then(response => {
+      .then((response) => {
         if (response.status === 201) {
           dispatch({ type: FETCH_CAR, payload: response.data.data });
+          callback(true);
+        }
+      })
+      .catch(() => {
+        callback(false);
+      });
+  };
+}
+
+export function solicitRide(values, rideId, callback) {
+  return (dispatch) => {
+    Axios.post(solicitRideRoute(rideId), values)
+      .then((response) => {
+        if (response.status === 201) {
+          dispatch({ type: FETCH_USER, payload: response.data.data });
           callback(true);
         }
       })
