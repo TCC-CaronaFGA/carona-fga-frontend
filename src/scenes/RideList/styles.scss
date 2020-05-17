@@ -1,5 +1,11 @@
 @import "../../shared/LayoutApp/styles.scss";
 
+.ant-list-item-meta-title, .ant-form.ant-form-horizontal h5 {
+  &:first-letter {
+    text-transform: uppercase;
+  }
+}
+
 h4, h5 {
   color: $alto;
 }

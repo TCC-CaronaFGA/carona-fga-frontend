@@ -17,6 +17,8 @@ import Axios from "axios";
 import { rideRoute } from "../../constants/apiRoutes";
 import { connect } from "react-redux";
 import { solicitRide } from "../../shared/LayoutApp/_/actions";
+import moment from "moment";
+import "moment/locale/pt-br";
 
 class RideList extends Component {
   constructor(props) {
@@ -204,7 +206,9 @@ class RideList extends Component {
               </Col>
               <Col span={15}>
                 <List.Item.Meta
-                  title={item.dtRide}
+                  title={moment(item.dtRide).format(
+                    "dddd, DD/MM/YYYY [às] H:mm "
+                  )}
                   description={
                     <>
                       <h4>
@@ -244,7 +248,9 @@ class RideList extends Component {
               >
                 <Form onSubmit={this.handleSubmit}>
                   <h4>Quando?</h4>
-                  <h5>{item.dtRide}</h5>
+                  <h5>
+                    {moment(item.dtRide).format("dddd, DD/MM/YYYY [às] H:mm ")}
+                  </h5>
                   <h4>De onde?</h4>
                   <h5>{item.origin}</h5>
                   <h4>Para onde?</h4>
@@ -256,7 +262,7 @@ class RideList extends Component {
                   {item.idUser !== this.props.user.idUser && (
                     <>
                       <h4>Assentos solicitados?</h4>
-                      <Form.Item label="Assentos solicitados">
+                      <Form.Item>
                         {getFieldDecorator("requestedSeats")(
                           <InputNumber name="requestedSeats" min={1} max={4} />
                         )}
