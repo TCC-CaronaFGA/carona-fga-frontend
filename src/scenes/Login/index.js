@@ -16,7 +16,7 @@ class Login extends Component {
 
   componentDidMount() {
     const token = localStorage.getItem("auth_token");
-    console.log(token);
+    // console.log(token);
     if (token != null) {
       this.props.checkLogin((answer) => this.loginCallback(answer));
     } else {
@@ -50,7 +50,7 @@ class Login extends Component {
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     const { getFieldDecorator } = this.props.form;
     return (
       <div className="section">

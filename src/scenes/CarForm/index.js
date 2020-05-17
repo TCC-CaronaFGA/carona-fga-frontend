@@ -7,11 +7,11 @@ import "./styles.scss";
 class CarForm extends Component {
   constructor(props) {
     super(props);
-    console.log("carProps", props);
+    // console.log("carProps", props);
     this.state = { redirect: false };
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
@@ -29,7 +29,7 @@ class CarForm extends Component {
     });
   };
 
-  createCarCallback = success => {
+  createCarCallback = (success) => {
     success
       ? this.setState({ redirect: true })
       : notification.open({
@@ -37,8 +37,8 @@ class CarForm extends Component {
           description: "Não foi possível adicionar o carro.",
           style: {
             width: 600,
-            marginLeft: 335 - 600
-          }
+            marginLeft: 335 - 600,
+          },
         });
   };
 
@@ -54,25 +54,29 @@ class CarForm extends Component {
               <Form.Item label="Modelo">
                 {getFieldDecorator("model", {
                   rules: [
-                    { required: true, message: "Insira o modelo do carro." }
-                  ]
+                    { required: true, message: "Insira o modelo do carro." },
+                  ],
                 })(<Input placeholder="Indique o modelo do carro" />)}
               </Form.Item>
               <Form.Item label="Ano">
                 {getFieldDecorator("year", {
-                  rules: [{ required: true, message: "Insira o ano do carro." }]
+                  rules: [
+                    { required: true, message: "Insira o ano do carro." },
+                  ],
                 })(<Input placeholder="Indique o ano do carro" />)}
               </Form.Item>
               <Form.Item label="Placa">
                 {getFieldDecorator("plate", {
                   rules: [
-                    { required: true, message: "Insira a placa do carro." }
-                  ]
+                    { required: true, message: "Insira a placa do carro." },
+                  ],
                 })(<Input placeholder="Indique a placa do carro" />)}
               </Form.Item>
               <Form.Item label="Cor">
                 {getFieldDecorator("color", {
-                  rules: [{ required: true, message: "Insira a cor do carro." }]
+                  rules: [
+                    { required: true, message: "Insira a cor do carro." },
+                  ],
                 })(<Input placeholder="Indique a cor do carro" />)}
               </Form.Item>
               <Form.Item>

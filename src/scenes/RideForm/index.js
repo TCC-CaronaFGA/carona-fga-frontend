@@ -10,7 +10,7 @@ import {
   InputNumber,
   Switch,
   Button,
-  notification
+  notification,
 } from "antd";
 import "./styles.scss";
 import TextArea from "antd/lib/input/TextArea";
@@ -28,14 +28,14 @@ function onChange(value) {
 class RideForm extends Component {
   constructor(props) {
     super(props);
-    console.log("rideProps", props);
+    // console.log("rideProps", props);
     this.state = { loading: true, redirect: false, cars: [], fga: false };
     setupInterceptors();
   }
 
   componentDidMount() {
     Axios.get(carRoute)
-      .then(response => {
+      .then((response) => {
         if (response.status === 200) {
           this.setState({ cars: response.data.data });
         }
@@ -44,7 +44,7 @@ class RideForm extends Component {
         notification.open({ message: "Falha ao recuperar lista de carros" });
       });
     this.props.form.setFieldsValue({
-      destiny: this.addressFGA
+      destiny: this.addressFGA,
     });
   }
 
@@ -81,14 +81,14 @@ class RideForm extends Component {
     "Candangolândia",
     "Varjão",
     "Fercal",
-    "SIA"
+    "SIA",
   ];
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log("Valores recebidos do formulário da carona: ", values);
+        // console.log("Valores recebidos do formulário da carona: ", values);
         const requisicao = {
           location: values.location,
           origin: values.origin,
@@ -100,20 +100,20 @@ class RideForm extends Component {
           availableSeats: values.availableSeats,
           cost: values.cost,
           notes: values.notes,
-          idCar: values.car
+          idCar: values.car,
         };
         Axios.post(rideRoute, requisicao)
-          .then(response => {
+          .then((response) => {
             if (response.status === 200) {
               notification.open({
-                message: "Carona criada com sucesso!"
+                message: "Carona criada com sucesso!",
               });
               this.props.history.push("/search-ride");
             }
           })
           .catch(() => {
             notification.open({
-              message: "Falha ao criar carona."
+              message: "Falha ao criar carona.",
             });
           });
       }
@@ -123,11 +123,11 @@ class RideForm extends Component {
   goingToFGA = () => {
     let isGoing = this.state.fga ? false : true;
     this.setState({
-      fga: isGoing
+      fga: isGoing,
     });
     this.props.form.setFieldsValue({
       origin: isGoing ? this.addressFGA : "",
-      destiny: isGoing ? "" : this.addressFGA
+      destiny: isGoing ? "" : this.addressFGA,
     });
   };
 
@@ -165,12 +165,12 @@ class RideForm extends Component {
                     rules: [
                       {
                         required: true,
-                        message: "Selecione o carro."
-                      }
-                    ]
+                        message: "Selecione o carro.",
+                      },
+                    ],
                   })(
                     <Select name="car" placeholder="Selecione um carro">
-                      {this.state.cars.map(item => {
+                      {this.state.cars.map((item) => {
                         return (
                           <Option value={item.idCar} key={item.idCar}>
                             {`${item.model} ${item.color} `}
@@ -185,9 +185,9 @@ class RideForm extends Component {
                     rules: [
                       {
                         required: true,
-                        message: "Insira a região."
-                      }
-                    ]
+                        message: "Insira a região.",
+                      },
+                    ],
                   })(
                     <Select name="location" placeholder="Selecione uma região">
                       {this.LOCATIONS.map((item, i) => {
@@ -205,9 +205,9 @@ class RideForm extends Component {
                     rules: [
                       {
                         required: true,
-                        message: "Insira a origem."
-                      }
-                    ]
+                        message: "Insira a origem.",
+                      },
+                    ],
                   })(<Input placeholder="Indique o endereço" />)}
                 </Form.Item>
                 <Form.Item label="Destino">
@@ -215,9 +215,9 @@ class RideForm extends Component {
                     rules: [
                       {
                         required: true,
-                        message: "Insira o destino."
-                      }
-                    ]
+                        message: "Insira o destino.",
+                      },
+                    ],
                   })(<Input placeholder="Destino" />)}
                 </Form.Item>
                 <Row gutter={24}>
@@ -227,9 +227,9 @@ class RideForm extends Component {
                         rules: [
                           {
                             required: true,
-                            message: "Insira a data."
-                          }
-                        ]
+                            message: "Insira a data.",
+                          },
+                        ],
                       })(
                         <DatePicker
                           placeholder="Selecione a data"
@@ -237,7 +237,7 @@ class RideForm extends Component {
                           minDate="0"
                           locale={locale}
                           disabledDate={this.disabledDate}
-                          dateRender={current => {
+                          dateRender={(current) => {
                             const style = {};
                             if (current.date() === 1) {
                               style.border = "1px solid #1890ff";
@@ -260,9 +260,9 @@ class RideForm extends Component {
                           {
                             type: "object",
                             required: true,
-                            message: "Insira o horário de saída."
-                          }
-                        ]
+                            message: "Insira o horário de saída.",
+                          },
+                        ],
                       })(
                         <TimePicker
                           minuteStep={15}
@@ -286,9 +286,9 @@ class RideForm extends Component {
                           {
                             required: true,
                             message:
-                              "Insira a quantidade de assentos disponíveis."
-                          }
-                        ]
+                              "Insira a quantidade de assentos disponíveis.",
+                          },
+                        ],
                       })(
                         <InputNumber
                           name="availableSeats"
@@ -305,18 +305,18 @@ class RideForm extends Component {
                         rules: [
                           {
                             required: true,
-                            message: "Insira o custo sugerido para a carona."
-                          }
-                        ]
+                            message: "Insira o custo sugerido para a carona.",
+                          },
+                        ],
                       })(
                         <InputNumber
                           placeholder="R$ 0,00"
                           min={0}
                           max={10}
-                          formatter={value =>
+                          formatter={(value) =>
                             `R$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ".")
                           }
-                          parser={value => value.replace(/\$\s?|(,*)/g, "")}
+                          parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
                         />
                       )}
                     </Form.Item>

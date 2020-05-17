@@ -11,13 +11,13 @@ class Navigation extends Component {
   };
 
   onCollapse = (collapsed) => {
-    console.log(collapsed);
+    // console.log(collapsed);
     this.setState({ collapsed });
   };
 
   render() {
     const logged = Object.keys(this.props.user).length !== 0;
-    console.log(logged, this.props.user);
+    // console.log(logged, this.props.user);
     return (
       <>
         {logged ? (

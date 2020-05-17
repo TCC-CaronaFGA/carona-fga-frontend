@@ -22,14 +22,14 @@ class Register extends Component {
     "Engenharias",
     "Engenharia Aeroespacial",
     "Engenharia Automotiva",
-    "Engenharia Eletrònica",
+    "Engenharia Eletrônica",
     "Engenharia de Energia",
     "Engenharia de Software",
   ];
 
   constructor(props) {
     super(props);
-    console.log("registerProps", props);
+    // console.log("registerProps", props);
     this.state = { loading: true, redirect: Object.keys(props.user) > 0 };
   }
 

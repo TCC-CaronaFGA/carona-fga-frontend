@@ -48,7 +48,7 @@ class RideList extends Component {
   }
 
   requestRide() {
-    console.log(this.props);
+    // console.log(this.props);
   }
 
   LOCATIONS = [
@@ -111,17 +111,17 @@ class RideList extends Component {
           rideId,
           this.solicitRideCallback.bind(this)
         );
-        console.log(
-          "Valores recebidos do formulário da solicitaçao da carona: ",
-          values
-        );
-        const requisicao = {
-          dtRide: values.dtRide,
-          origin: values.origin,
-          location: values.location,
-          requestedSeats: values.requestedSeats,
-        };
-        console.log("Requisição ", requisicao);
+        // console.log(
+        //   "Valores recebidos do formulário da solicitaçao da carona: ",
+        //   values
+        // );
+        // const requisicao = {
+        //   dtRide: values.dtRide,
+        //   origin: values.origin,
+        //   location: values.location,
+        //   requestedSeats: values.requestedSeats,
+        // };
+        // console.log("Requisição ", requisicao);
       }
     });
   };
@@ -150,7 +150,7 @@ class RideList extends Component {
   };
 
   render() {
-    console.log(this.state.filteredRides);
+    // console.log(this.state.filteredRides);
     const { getFieldDecorator } = this.props.form;
     // const { Option } = Select;
     // console.log(this.state.rides);

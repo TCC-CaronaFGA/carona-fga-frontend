@@ -8,56 +8,56 @@ class Ranking extends Component {
     {
       key: "1",
       name: "Vinicius",
-      qtdRides: 1
+      qtdRides: 1,
     },
     {
       key: "2",
       name: "Ana",
-      qtdRides: 10
+      qtdRides: 10,
     },
     {
       key: "3",
       name: "Gabriel",
-      qtdRides: 4
+      qtdRides: 4,
     },
     {
       key: "4",
       name: "Guilherme",
-      qtdRides: 6
+      qtdRides: 6,
     },
     {
       key: "5",
       name: "Camila",
-      qtdRides: 9
+      qtdRides: 9,
     },
     {
       key: "6",
       name: "Julia",
-      qtdRides: 1
+      qtdRides: 1,
     },
     {
       key: "7",
       name: "Rafael",
-      qtdRides: 8
-    }
+      qtdRides: 8,
+    },
   ];
 
   columns = [
     {
       title: "#",
       dataIndex: "posicao",
-      key: "posicao"
+      key: "posicao",
     },
     {
       title: "Nome",
-      dataIndex: "name"
+      dataIndex: "name",
     },
     {
       title: "Caronas",
       dataIndex: "qtdRides",
       defaultSortOrder: "descend",
-      sorter: (a, b) => a.qtdRides - b.qtdRides
-    }
+      sorter: (a, b) => a.qtdRides - b.qtdRides,
+    },
   ];
 
   render() {
@@ -102,12 +102,12 @@ class Ranking extends Component {
 }
 
 function onChange(pagination, filters, sorter, extra) {
-  console.log("params", pagination, filters, sorter, extra);
+  // console.log("params", pagination, filters, sorter, extra);
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
   };
 };
 
