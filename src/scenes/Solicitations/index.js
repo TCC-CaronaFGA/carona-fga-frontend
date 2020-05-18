@@ -32,7 +32,7 @@ class RideList extends Component {
     return (
       <>
         <div>
-          <h1>Solicações recebidas</h1>
+          <h1>Solicitações recebidas</h1>
           <List
             grid={{
               gutter: 16,
