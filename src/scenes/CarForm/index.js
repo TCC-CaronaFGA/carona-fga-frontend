@@ -31,9 +31,17 @@ class CarForm extends Component {
 
   createCarCallback = (success) => {
     success
-      ? this.setState({ redirect: true })
+      ? this.setState({ redirect: true }) &&
+        notification.open({
+          message: "Carro adicionado com sucesso!",
+          description: "",
+          style: {
+            width: 600,
+            marginLeft: 335 - 600,
+          },
+        })
       : notification.open({
-          message: "Carro adicionado com sucesso",
+          message: "Erro interno",
           description: "Não foi possível adicionar o carro.",
           style: {
             width: 600,

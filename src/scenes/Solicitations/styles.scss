@@ -1,0 +1,12 @@
+@import "../../shared/LayoutApp/styles.scss";
+
+.card-solicitations {
+	.user-avatar {
+		font-size: 56px;
+		text-align: center;
+		color: $alert;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}

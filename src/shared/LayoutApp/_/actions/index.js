@@ -107,6 +107,7 @@ export function createCar(values, callback) {
 
 export function solicitRide(values, rideId, callback) {
   return (dispatch) => {
+    console.log("solicite ride route", solicitRideRoute);
     Axios.post(solicitRideRoute(rideId), values)
       .then((response) => {
         if (response.status === 201) {

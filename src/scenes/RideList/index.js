@@ -140,7 +140,7 @@ class RideList extends Component {
     } else
       notification.open({
         message:
-          "Erro ao solicitar carona (Você inseriu o numero de assentos?)!",
+          "Erro ao solicitar carona (Você inseriu a quantidade de assentos?)!",
         description: "",
         style: {
           width: 600,

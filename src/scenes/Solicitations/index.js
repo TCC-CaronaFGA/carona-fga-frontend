@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Col, List, Icon, Button } from "antd";
 import Axios from "axios";
 import { answerSolicitationRoute } from "../../constants/apiRoutes";
+import "./styles.scss";
 
 class RideList extends Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class RideList extends Component {
     // console.log(this.state);
     return (
       <>
-        <div>
+        <div className="card-solicitations">
           <h1>Solicitações recebidas</h1>
           <List
             grid={{
@@ -49,7 +50,7 @@ class RideList extends Component {
             {this.state.notifications &&
               this.state.notifications.map((item, i) => (
                 <List.Item key={i}>
-                  <Col span={3}>
+                  <Col span={3} className="user-avatar">
                     <Icon type="user" />
                   </Col>
                   <Col span={15}>
@@ -91,7 +92,7 @@ class RideList extends Component {
               ))}
           </List>
         </div>
-        <div>
+        <div className="card-solicitations">
           <h1>Novas respostas recebidas</h1>
           <List
             grid={{
