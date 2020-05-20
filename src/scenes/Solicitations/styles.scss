@@ -2,11 +2,27 @@
 
 .card-solicitations {
 	.user-avatar {
-		font-size: 56px;
+		font-size: 48px;
+		padding: 54px 24px;
 		text-align: center;
 		color: $alert;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+	h3 {
+		text-align: center;
+	}
+	.card-btn {
+		padding: 12px;
+		.ant-btn-secondary, .ant-btn-secondary:hover {
+			border-color: $alto !important;
+			color: $alto !important;
+		}
+		.ant-btn-primary {
+			background-color: $alto !important;
+			border-color: $alto !important;
+			color: $ebony !important;
+		}
 	}
 }
