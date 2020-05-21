@@ -5,6 +5,8 @@ import { Col, List, Icon, Button, Row } from "antd";
 import Axios from "axios";
 import { answerSolicitationRoute } from "../../constants/apiRoutes";
 import "./styles.scss";
+import moment from "moment";
+import "moment/locale/pt-br";
 
 class RideList extends Component {
   constructor(props) {
@@ -56,13 +58,15 @@ class RideList extends Component {
                     </Col>
                     <Col span={15}>
                       <List.Item.Meta
-                        title={item.ride.dtRide}
+                        title={moment(item.ride.dtRide).format(
+                          "dddd, DD/MM/YYYY [às] H:mm "
+                        )}
                         description={
                           <>
                             <h4>
                               {item.ride.location} - {item.ride.origin}
                             </h4>
-                            <h5>{item.passenger.name}</h5>
+                            <h4>{item.passenger.name}</h4>
                           </>
                         }
                       />
@@ -124,14 +128,16 @@ class RideList extends Component {
                     </Col>
                     <Col span={15}>
                       <List.Item.Meta
-                        title={item.request.data.ride.dtRide}
+                        title={moment(item.request.data.ride.dtRide).format(
+                          "dddd, DD/MM/YYYY [às] H:mm "
+                        )}
                         description={
                           <>
                             <h4>
                               {item.request.data.ride.location} -{" "}
                               {item.request.data.ride.origin}
                             </h4>
-                            <h5>{item.request.data.ride.user.name}</h5>
+                            <h4>{item.request.data.ride.user.name}</h4>
                           </>
                         }
                       />
