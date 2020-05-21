@@ -59,7 +59,7 @@ class Profile extends Component {
                     <ul>
                       {this.state.cars.map((item) => (
                         <li key={item.idCar}>{item.model}</li>
-                      )) == 0 && <h3>Nenhum carro cadastrado.</h3>}
+                      ))}
                     </ul>
                   </div>
                 </Row>

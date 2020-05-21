@@ -47,3 +47,20 @@ h1, .ant-form-item-label > label {
 .ant-select-selection:hover {
   border-color: $gigas;
 }
+
+.details {
+  background-color: $alto;
+	margin: 16px 32px;
+	border-radius: 50px;
+	padding: 32px;
+
+	h2 {
+    text-align: center;
+		color: $ebony !important;
+		line-height: 1.8;
+		border-bottom: 1px solid $melrose;
+		padding-bottom: 16px;
+		margin-bottom: 32px;
+	}
+	
+}

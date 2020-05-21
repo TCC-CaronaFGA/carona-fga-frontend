@@ -55,7 +55,7 @@ class CarForm extends Component {
 
     return (
       <>
-        <Col lg={6} md={8} sm={8}>
+        <Col lg={6} md={12} sm={12} xs={12}>
           <div className="car-form">
             <h1>Adicionar carro</h1>
             <Form onSubmit={this.handleSubmit}>
