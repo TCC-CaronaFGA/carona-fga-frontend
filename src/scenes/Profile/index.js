@@ -14,7 +14,7 @@ class Profile extends Component {
 
   componentDidMount() {
     Axios.get(carRoute)
-      .then(response => {
+      .then((response) => {
         if (response.status === 200) {
           this.setState({ cars: response.data.data });
         }
@@ -52,15 +52,14 @@ class Profile extends Component {
                   </div>
                 </Row>
                 <Row>
-                  <div className="profile-details">
+                  <div className="profile-details car-detail">
                     <h2>
                       Meu carro <Icon type="car" />
                     </h2>
-
                     <ul>
-                      {this.state.cars.map(item => (
+                      {this.state.cars.map((item) => (
                         <li key={item.idCar}>{item.model}</li>
-                      ))}
+                      )) == 0 && <h3>Nenhum carro cadastrado.</h3>}
                     </ul>
                   </div>
                 </Row>
@@ -76,10 +75,10 @@ class Profile extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     user: state.user,
-    cars: state.cars
+    cars: state.cars,
   };
 };
 
