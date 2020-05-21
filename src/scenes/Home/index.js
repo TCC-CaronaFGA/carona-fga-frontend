@@ -12,16 +12,16 @@ class Home extends Component {
             <Spin tip="Carregando..." />
           </div>
         ) : (
-          <h1>Bem vindo(a), {this.props.user.name}</h1>
+          <h1>Bem vindo(a), {this.props.user.name} :)</h1>
         )}
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
   };
 };
 

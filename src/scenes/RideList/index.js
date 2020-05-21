@@ -186,94 +186,114 @@ class RideList extends Component {
             </Col>
           </Row>
         </Form>
-        <List
-          grid={{
-            gutter: 16,
-            xs: 1,
-            sm: 2,
-            md: 2,
-            lg: 3,
-            xl: 3,
-            xxl: 3,
-          }}
-          itemLayout="horizontal"
-          locale={{ emptyText: "Nenhuma carona encontrada." }}
-        >
-          {this.state.filteredRides.map((item, i) => (
-            <List.Item key={i}>
-              <Col span={3}>
-                <Icon type="car" />
-              </Col>
-              <Col span={15}>
-                <List.Item.Meta
-                  title={moment(item.dtRide).format(
-                    "dddd, DD/MM/YYYY [às] H:mm "
-                  )}
-                  description={
-                    <>
-                      <h4>
-                        {item.location} - {item.origin}
-                      </h4>
-                      <h5>{item.user.name}</h5>
-                    </>
+        {this.state.filteredRides == 0 ? (
+          <div className="section">
+            <div className="details">
+              <h2>
+                Para oferecer uma carona é necessário <br />
+                adicionar pelo menos um carro em seu perfil
+              </h2>
+            </div>
+          </div>
+        ) : (
+          <List
+            grid={{
+              gutter: 16,
+              xs: 1,
+              sm: 2,
+              md: 2,
+              lg: 3,
+              xl: 3,
+              xxl: 3,
+            }}
+            itemLayout="horizontal"
+            locale={{ emptyText: "Nenhuma carona encontrada." }}
+          >
+            {this.state.filteredRides.map((item, i) => (
+              <List.Item key={i}>
+                <Col span={3}>
+                  <Icon type="car" />
+                </Col>
+                <Col span={15}>
+                  <List.Item.Meta
+                    title={moment(item.dtRide).format(
+                      "dddd, DD/MM/YYYY [às] H:mm "
+                    )}
+                    description={
+                      <>
+                        <h4>
+                          {item.location} - {item.origin}
+                        </h4>
+                        <h5>{item.user.name}</h5>
+                      </>
+                    }
+                  />
+                </Col>
+                <Col span={6}>
+                  <div className="vagas-disponiveis">
+                    <h4>VAGAS</h4>
+                    <h3>{item.availableSeats}</h3>
+                  </div>
+                </Col>
+                <Button
+                  type="primary"
+                  onClick={() => this.setModalVisible(true)}
+                >
+                  mais detalhes
+                </Button>
+                <Modal
+                  className="modal"
+                  title="Informações da carona"
+                  centered
+                  visible={this.state.modalVisible}
+                  okText={
+                    item.idUser !== this.props.user.idUser
+                      ? "Solicitar carona"
+                      : null
                   }
-                />
-              </Col>
-              <Col span={6}>
-                <div className="vagas-disponiveis">
-                  <h4>VAGAS</h4>
-                  <h3>{item.availableSeats}</h3>
-                </div>
-              </Col>
-              <Button type="primary" onClick={() => this.setModalVisible(true)}>
-                mais detalhes
-              </Button>
-              <Modal
-                className="modal"
-                title="Informações da carona"
-                centered
-                visible={this.state.modalVisible}
-                okText={
-                  item.idUser !== this.props.user.idUser
-                    ? "Solicitar carona"
-                    : null
-                }
-                cancelText="Cancelar"
-                onOk={() =>
-                  item.idUser !== this.props.user.idUser
-                    ? this.handleSubmit(null, item.idRide)
-                    : this.setModalVisible(false)
-                }
-                onCancel={() => this.setModalVisible(false)}
-              >
-                <Form onSubmit={this.handleSubmit}>
-                  <h4>Quando?</h4>
-                  <h5>
-                    {moment(item.dtRide).format("dddd, DD/MM/YYYY [às] H:mm ")}
-                  </h5>
-                  <h4>De onde?</h4>
-                  <h5>{item.origin}</h5>
-                  <h4>Para onde?</h4>
-                  <h5>{item.location}</h5>
-                  <h4>Com quem?</h4>
-                  <h5>
-                    {item.user.name} - {item.user.course} - {item.user.phone}
-                  </h5>
-                  {item.idUser !== this.props.user.idUser && (
-                    <>
-                      <h4>Assentos solicitados?</h4>
-                      <Form.Item>
-                        {getFieldDecorator("requestedSeats")(
-                          <InputNumber name="requestedSeats" min={1} max={4} />
-                        )}
-                      </Form.Item>
-                    </>
-                  )}
-                </Form>
-              </Modal>
-            </List.Item>
-          ))}
-        </List>
+                  cancelText="Cancelar"
+                  onOk={() =>
+                    item.idUser !== this.props.user.idUser
+                      ? this.handleSubmit(null, item.idRide)
+                      : this.setModalVisible(false)
+                  }
+                  onCancel={() => this.setModalVisible(false)}
+                >
+                  <Form onSubmit={this.handleSubmit}>
+                    <h4>Quando?</h4>
+                    <h5>
+                      {moment(item.dtRide).format(
+                        "dddd, DD/MM/YYYY [às] H:mm "
+                      )}
+                    </h5>
+                    <h4>De onde?</h4>
+                    <h5>{item.origin}</h5>
+                    <h4>Para onde?</h4>
+                    <h5>{item.location}</h5>
+                    <h4>Com quem?</h4>
+                    <h5>
+                      {item.user.name} - {item.user.course} - {item.user.phone}
+                    </h5>
+                    {item.idUser !== this.props.user.idUser && (
+                      <>
+                        <h4>Assentos solicitados?</h4>
+                        <Form.Item>
+                          {getFieldDecorator("requestedSeats")(
+                            <InputNumber
+                              name="requestedSeats"
+                              min={1}
+                              max={4}
+                            />
+                          )}
+                        </Form.Item>
+                      </>
+                    )}
+                  </Form>
+                </Modal>
+              </List.Item>
+            ))}
+          </List>
+        )}
       </>
     );
   }

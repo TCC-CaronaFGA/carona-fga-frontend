@@ -34,7 +34,7 @@ class Profile extends Component {
         ) : (
           <>
             <Row>
-              <h1>Bem vindo(a), {this.props.user.name}</h1>
+              <h1>Bem vindo(a), {this.props.user.name} :)</h1>
               <Col span={8}>
                 <Row>
                   <div className="profile-details info">

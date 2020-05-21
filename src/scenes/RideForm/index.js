@@ -146,8 +146,8 @@ class RideForm extends Component {
           {this.state.cars == 0 ? (
             <div className="details">
               <h2>
-                Para oferecer uma carona é necessário <br />
-                adicionar pelo menos um carro em seu perfil
+                Ainda não há caronas :( <br />
+                Que tal oferecer uma?
               </h2>
             </div>
           ) : (

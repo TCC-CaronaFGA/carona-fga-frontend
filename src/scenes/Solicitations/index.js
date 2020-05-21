@@ -151,8 +151,8 @@ class RideList extends Component {
                     <Col span={24}>
                       <h3>
                         {item.answer === "A"
-                          ? "Solicitação aceita!!"
-                          : "Solicitação Recusada"}
+                          ? "Solicitação aceita!! :)"
+                          : "Solicitação recusada :("}
                       </h3>
                     </Col>
                   </List.Item>
