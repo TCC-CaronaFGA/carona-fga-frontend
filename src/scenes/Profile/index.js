@@ -64,6 +64,11 @@ class Profile extends Component {
                           </h5>
                         </li>
                       ))}
+                      {this.state.cars === 0 && (
+                        <h5>
+                          Adicione um carro ao seu perfil para oferecer caronas.
+                        </h5>
+                      )}
                     </ul>
                   </div>
                 </Row>
@@ -72,7 +77,7 @@ class Profile extends Component {
                     <h2>
                       Caronas oferecidas <Icon type="star" />
                     </h2>
-                    <h5>5 caronas</h5>
+                    <h3>5 caronas</h3>
                   </div>
                 </Row>
               </Col>

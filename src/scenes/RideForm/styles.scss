@@ -67,5 +67,9 @@ h1, .ant-form-item-label > label {
 }
 
 .section-ride {
-  height: 60vh !important;
+  height: 90vh !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
 }
