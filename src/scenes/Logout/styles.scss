@@ -1,6 +1,7 @@
 @import "../../shared/LayoutApp/styles.scss";
 
 .section {
+	overflow-y: scroll;
 	background-repeat: no-repeat;
 	background-size: cover;	
 	height: 100vh;

@@ -186,7 +186,7 @@ class RideList extends Component {
             </Col>
           </Row>
         </Form>
-        {this.state.filteredRides == 0 ? (
+        {this.state.filteredRides === 0 ? (
           <div className="section">
             <div className="details">
               <h2>
