@@ -58,9 +58,21 @@ class Profile extends Component {
                     </h2>
                     <ul>
                       {this.state.cars.map((item) => (
-                        <li key={item.idCar}>{item.model}</li>
+                        <li key={item.idCar}>
+                          <h5>
+                            {item.model} - {item.color} - {item.plate}
+                          </h5>
+                        </li>
                       ))}
                     </ul>
+                  </div>
+                </Row>
+                <Row>
+                  <div className="profile-details">
+                    <h2>
+                      Caronas oferecidas <Icon type="star" />
+                    </h2>
+                    <h5>5 caronas</h5>
                   </div>
                 </Row>
               </Col>

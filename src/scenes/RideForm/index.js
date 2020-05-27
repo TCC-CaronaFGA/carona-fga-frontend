@@ -142,8 +142,8 @@ class RideForm extends Component {
     const { Option } = Select;
     return (
       <>
-        <div className="section">
-          {this.state.cars == 0 ? (
+        <div className="section-ride">
+          {this.state.cars === 0 ? (
             <div className="details">
               <h2>
                 Ainda não há caronas :( <br />
