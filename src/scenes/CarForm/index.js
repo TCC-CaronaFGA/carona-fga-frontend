@@ -55,50 +55,44 @@ class CarForm extends Component {
 
     return (
       <>
-        <Col lg={6} md={12} sm={12} xs={12}>
-          <div className="car-form">
-            <h1>Adicionar carro</h1>
-            <Form onSubmit={this.handleSubmit}>
-              <Form.Item label="Modelo">
-                {getFieldDecorator("model", {
-                  rules: [
-                    { required: true, message: "Insira o modelo do carro." },
-                  ],
-                })(<Input placeholder="Indique o modelo do carro" />)}
-              </Form.Item>
-              <Form.Item label="Ano">
-                {getFieldDecorator("year", {
-                  rules: [
-                    { required: true, message: "Insira o ano do carro." },
-                  ],
-                })(<Input placeholder="Indique o ano do carro" />)}
-              </Form.Item>
-              <Form.Item label="Placa">
-                {getFieldDecorator("plate", {
-                  rules: [
-                    { required: true, message: "Insira a placa do carro." },
-                  ],
-                })(<Input placeholder="Indique a placa do carro" />)}
-              </Form.Item>
-              <Form.Item label="Cor">
-                {getFieldDecorator("color", {
-                  rules: [
-                    { required: true, message: "Insira a cor do carro." },
-                  ],
-                })(<Input placeholder="Indique a cor do carro" />)}
-              </Form.Item>
-              <Form.Item>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  loading={this.state.loading}
-                  className="btn-form"
-                >
-                  ADICIONAR CARRO
-                </Button>
-              </Form.Item>
-            </Form>
-          </div>
+        <Col lg={6} md={12} sm={12} xs={12} className="car-form">
+          <h1>Adicionar carro</h1>
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Item label="Modelo">
+              {getFieldDecorator("model", {
+                rules: [
+                  { required: true, message: "Insira o modelo do carro." },
+                ],
+              })(<Input placeholder="Indique o modelo do carro" />)}
+            </Form.Item>
+            <Form.Item label="Ano">
+              {getFieldDecorator("year", {
+                rules: [{ required: true, message: "Insira o ano do carro." }],
+              })(<Input placeholder="Indique o ano do carro" />)}
+            </Form.Item>
+            <Form.Item label="Placa">
+              {getFieldDecorator("plate", {
+                rules: [
+                  { required: true, message: "Insira a placa do carro." },
+                ],
+              })(<Input placeholder="Indique a placa do carro" />)}
+            </Form.Item>
+            <Form.Item label="Cor">
+              {getFieldDecorator("color", {
+                rules: [{ required: true, message: "Insira a cor do carro." }],
+              })(<Input placeholder="Indique a cor do carro" />)}
+            </Form.Item>
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={this.state.loading}
+                className="btn-form"
+              >
+                Salvar
+              </Button>
+            </Form.Item>
+          </Form>
         </Col>
       </>
     );

@@ -8,12 +8,12 @@
 	padding: 32px;
 
 	
-	h3 {
+	h3, h4 {
 		color: $ebony !important;
 		line-height: 1.6;
 	}
 	
-	h2, h5 {
+	h2 {
 		color: $ebony !important;
 		line-height: 1.8;
 		border-bottom: 1px solid $melrose;
@@ -27,11 +27,14 @@
 		float: right;
 	}
 
-}
-.car-detail {
-	h3 {
-		padding: 0 !important;
+	.car-detail {
+		h3 {
+			padding: 0 !important;
+		}
 	}
+}
+.ant-layout-content {
+	line-height: 100% !important;
 }
 
 .info {
