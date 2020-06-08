@@ -8,6 +8,7 @@ import {
   rideRoute,
   carRoute,
   solicitRideRoute,
+  answerSolicitationRoute,
 } from "../../../../constants/apiRoutes";
 import { FETCH_USER, LOGOUT_USER, FETCH_CAR } from "./types";
 
@@ -76,12 +77,11 @@ export function checkLogin(callback) {
 }
 
 export function createRide(values, callback) {
-  return (dispatch) => {
+  return () => {
     Axios.post(rideRoute, values)
       .then((response) => {
         if (response.status === 201) {
-          // dispatch({ type: FETCH_RIDE, payload: response.data.data });
-          // callback(true);
+          callback(true);
         }
       })
       .catch(() => {
@@ -94,7 +94,7 @@ export function createCar(values, callback) {
   return (dispatch) => {
     Axios.post(carRoute, values)
       .then((response) => {
-        if (response.status === 201) {
+        if (response.status === 200) {
           dispatch({ type: FETCH_CAR, payload: response.data.data });
           callback(true);
         }
@@ -106,17 +106,24 @@ export function createCar(values, callback) {
 }
 
 export function solicitRide(values, rideId, callback) {
-  return (dispatch) => {
-    console.log("solicite ride route:", solicitRideRoute(rideId));
-    Axios.post(solicitRideRoute(rideId), values)
-      .then((response) => {
-        if (response.status === 201) {
-          dispatch({ type: FETCH_USER, payload: response.data.data });
-          callback(true);
-        }
-      })
-      .catch(() => {
+  return () => {
+    //console.log("solicite ride route:", solicitRideRoute(rideId));
+    Axios.post(solicitRideRoute(rideId), values).then((response) => {
+      if (response.status === 200) {
+        callback(true);
+      } else {
         callback(false);
-      });
+      }
+    });
+  };
+}
+
+export function answer(id, answer) {
+  return (dispatch) => {
+    Axios.post(answerSolicitationRoute(id, answer)).then((response) => {
+      if (response.status === 200) {
+        dispatch({ type: FETCH_USER, payload: response.data.data });
+      }
+    });
   };
 }

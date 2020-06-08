@@ -105,7 +105,6 @@ class RideList extends Component {
     e && e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.solicitRide(values, () => this.solicitRideCallback());
         this.props.solicitRide(
           values,
           rideId,
@@ -254,7 +253,8 @@ class RideList extends Component {
                   cancelText="Cancelar"
                   onOk={() =>
                     item.idUser !== this.props.user.idUser
-                      ? this.handleSubmit(null, item.idRide)
+                      ? (this.handleSubmit(null, item.idRide),
+                        this.setModalVisible(false))
                       : this.setModalVisible(false)
                   }
                   onCancel={() => this.setModalVisible(false)}

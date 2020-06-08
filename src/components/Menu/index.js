@@ -85,7 +85,7 @@ class Navigation extends Component {
                 </Menu.Item>
                 <Menu.Item key="5">
                   <Link to="/solicitations">
-                    <Icon type="notification" />
+                    <Icon type="bell" />
                     Solicitações{" "}
                     {this.props.user &&
                       (this.props.user.notifications.length > 0 ||
