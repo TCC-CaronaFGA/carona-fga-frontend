@@ -9,6 +9,7 @@ import {
   Button,
   InputNumber,
   notification,
+  Select,
 } from "antd";
 import "./styles.scss";
 import Search from "antd/lib/input/Search";
@@ -105,7 +106,6 @@ class RideList extends Component {
     e && e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.solicitRide(values, () => this.solicitRideCallback());
         this.props.solicitRide(
           values,
           rideId,
@@ -149,10 +149,41 @@ class RideList extends Component {
       });
   };
 
+  filterGender = (value) => {
+    const rides = this.state.rides;
+    // console.log(value);
+    let filteredRides = rides.filter((ride) => {
+      // console.log(ride.user.gender);
+      if (ride.user.gender === value) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    if (filteredRides.length > 0) {
+      this.setState({ filteredRides, isFiltered: true });
+    } else {
+      this.setState({ filteredRides: [] });
+    }
+    if (value === undefined) {
+      const filteredRides = this.updateState();
+      this.setState({ filteredRides, isFiltered: false });
+    }
+    // console.log(filteredRides);
+  };
+
+  updateState() {
+    if (this.state.rides) {
+      let rides = Object.values(this.state.rides).flat();
+      return rides;
+    }
+  }
+
   render() {
-    // console.log(this.state.filteredRides);
+    const { filteredRides } = this.state;
+    console.log(this.state.filteredRides);
     const { getFieldDecorator } = this.props.form;
-    // const { Option } = Select;
+    const { Option } = Select;
     // console.log(this.state.rides);
 
     return (
@@ -184,6 +215,26 @@ class RideList extends Component {
                 ></Search>
               </Form.Item>
             </Col>
+            <Col lg={6} md={12} sm={12} xs={24}>
+              <Form.Item>
+                <Select
+                  placeholder="Escolher carona apenas com ..."
+                  filterOption={(input, option) =>
+                    option.props.children
+                      .toLowerCase()
+                      .indexOf(input.toLowerCase()) >= 0
+                  }
+                  onChange={this.filterGender}
+                >
+                  <Option key={1} value="F">
+                    Mulheres
+                  </Option>
+                  <Option key={0} value="M">
+                    Homens
+                  </Option>
+                </Select>
+              </Form.Item>
+            </Col>
           </Row>
         </Form>
         {this.state.filteredRides === 0 ? (
@@ -209,7 +260,7 @@ class RideList extends Component {
             itemLayout="horizontal"
             locale={{ emptyText: "Nenhuma carona encontrada." }}
           >
-            {this.state.filteredRides.map((item, i) => (
+            {filteredRides.map((item, i) => (
               <List.Item key={i}>
                 <Col span={3}>
                   <Icon type="car" />
@@ -254,7 +305,8 @@ class RideList extends Component {
                   cancelText="Cancelar"
                   onOk={() =>
                     item.idUser !== this.props.user.idUser
-                      ? this.handleSubmit(null, item.idRide)
+                      ? (this.handleSubmit(null, item.idRide),
+                        this.setModalVisible(false))
                       : this.setModalVisible(false)
                   }
                   onCancel={() => this.setModalVisible(false)}

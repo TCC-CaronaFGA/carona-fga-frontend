@@ -7,8 +7,9 @@ import { answerSolicitationRoute } from "../../constants/apiRoutes";
 import "./styles.scss";
 import moment from "moment";
 import "moment/locale/pt-br";
+// import { answer } from "../../shared/LayoutApp/_/actions";
 
-class RideList extends Component {
+class Solicitations extends Component {
   constructor(props) {
     super(props);
     setupInterceptors();
@@ -171,4 +172,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(RideList);
+export default connect(mapStateToProps, {})(Solicitations);

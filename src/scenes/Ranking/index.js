@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Spin, Table } from "antd";
+import { Spin, List } from "antd";
 import { connect } from "react-redux";
 import "./styles.scss";
 
@@ -7,38 +7,38 @@ class Ranking extends Component {
   data = [
     {
       key: "1",
-      name: "Vinicius",
-      qtdRides: 1,
+      name: "Thiago",
+      qtdRides: 10,
     },
     {
       key: "2",
       name: "Ana",
-      qtdRides: 10,
+      qtdRides: 8,
     },
     {
       key: "3",
       name: "Gabriel",
-      qtdRides: 4,
+      qtdRides: 8,
     },
     {
       key: "4",
       name: "Guilherme",
-      qtdRides: 6,
+      qtdRides: 7,
     },
     {
       key: "5",
       name: "Camila",
-      qtdRides: 9,
+      qtdRides: 4,
     },
     {
       key: "6",
       name: "Julia",
-      qtdRides: 1,
+      qtdRides: 3,
     },
     {
       key: "7",
       name: "Rafael",
-      qtdRides: 8,
+      qtdRides: 2,
     },
   ];
 
@@ -72,14 +72,15 @@ class Ranking extends Component {
         ) : (
           <>
             <h1>Ranking</h1>
-            {/* <List
+            <List
+              className="ranking"
               size="small"
               itemLayout="vertical"
               locale={{ emptyText: "Nenhum usuário encontrado." }}
             >
-              {this.users.map(user => {
+              {this.data.map((user) => {
                 return (
-                  <List.Item>
+                  <List.Item className="item-ranking">
                     <List.Item.Meta
                       title={user.name}
                       description={<h4>{user.qtdRides} caronas</h4>}
@@ -87,13 +88,12 @@ class Ranking extends Component {
                   </List.Item>
                 );
               })}
-            </List> */}
-            <Table
+            </List>
+            {/* <Table
               dataSource={this.data}
               columns={this.columns}
               onChange={onChange}
-            />
-            ;
+            /> */}
           </>
         )}
       </div>
@@ -101,9 +101,9 @@ class Ranking extends Component {
   }
 }
 
-function onChange(pagination, filters, sorter, extra) {
-  // console.log("params", pagination, filters, sorter, extra);
-}
+// function onChange(pagination, filters, sorter, extra) {
+//   // console.log("params", pagination, filters, sorter, extra);
+// }
 
 const mapStateToProps = (state) => {
   return {
