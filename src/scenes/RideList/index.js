@@ -215,7 +215,7 @@ class RideList extends Component {
                 ></Search>
               </Form.Item>
             </Col>
-            <Col lg={4} md={8} sm={12} xs={24}>
+            <Col lg={5} md={8} sm={12} xs={24}>
               <Form.Item>
                 <Select
                   placeholder="Escolher carona apenas com..."
