@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { setupInterceptors } from "../../auth/SetupInterceptors";
 import { connect } from "react-redux";
-import { Col, List, Icon, Button, Row } from "antd";
+import { Col, List, Icon, Button, Row, notification } from "antd";
 import Axios from "axios";
 import { answerSolicitationRoute } from "../../constants/apiRoutes";
 import "./styles.scss";
@@ -26,6 +26,9 @@ class Solicitations extends Component {
           notifications: this.state.notifications.filter(
             (notification) => notification.idRequest !== id
           ),
+        });
+        notification.open({
+          message: "Carona aceita com sucesso!",
         });
       }
     });
@@ -74,7 +77,7 @@ class Solicitations extends Component {
                     </Col>
                     <Col span={6}>
                       <div className="vagas-disponiveis">
-                        <h4>Vagas Solicitadas</h4>
+                        <h5>Vagas Solicitadas</h5>
                         <h3>{item.requestedSeats}</h3>
                       </div>
                     </Col>
@@ -145,7 +148,7 @@ class Solicitations extends Component {
                     </Col>
                     <Col span={6}>
                       <div className="vagas-disponiveis">
-                        <h4>VAGAS SOLICITADAS</h4>
+                        <h5>Vagas Solicitadas</h5>
                         <h3>{item.request.data.requestedSeats}</h3>
                       </div>
                     </Col>
