@@ -215,10 +215,10 @@ class RideList extends Component {
                 ></Search>
               </Form.Item>
             </Col>
-            <Col lg={6} md={12} sm={12} xs={24}>
+            <Col lg={4} md={8} sm={12} xs={24}>
               <Form.Item>
                 <Select
-                  placeholder="Escolher carona apenas com ..."
+                  placeholder="Escolher carona apenas com..."
                   filterOption={(input, option) =>
                     option.props.children
                       .toLowerCase()
