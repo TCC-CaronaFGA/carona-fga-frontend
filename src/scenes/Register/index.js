@@ -44,25 +44,37 @@ class Register extends Component {
     });
   };
 
+  // registerCallback = (success) => {
+  //   success
+  //     ? this.setState({ redirect: true }) &&
+  //       notification.open({
+  //         message: "Usuário criado com sucesso!",
+  //         description: "",
+  //         style: {
+  //           width: 600,
+  //           marginLeft: 335 - 600,
+  //         },
+  //       })
+  //     : notification.open({
+  //         message: "Não foi possível criar o usuário!",
+  //         description: "",
+  //         style: {
+  //           width: 600,
+  //           marginLeft: 335 - 600,
+  //         },
+  //       });
+  // };
+
   registerCallback = (success) => {
-    success
-      ? this.setState({ redirect: true }) &&
-        notification.open({
-          message: "Usuário criado com sucesso!",
-          description: "",
-          style: {
-            width: 600,
-            marginLeft: 335 - 600,
-          },
-        })
-      : notification.open({
-          message: "Não foi possível criar o usuário!",
-          description: "",
-          style: {
-            width: 600,
-            marginLeft: 335 - 600,
-          },
-        });
+    this.setState({ redirect: true }) &&
+      notification.open({
+        message: "Usuário criado com sucesso!",
+        description: "",
+        style: {
+          width: 600,
+          marginLeft: 335 - 600,
+        },
+      });
   };
 
   compareToFirstPassword = (rule, value, callback) => {

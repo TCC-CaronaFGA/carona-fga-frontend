@@ -108,3 +108,16 @@ h1 {
 	}
 	
 }
+
+.ant-select-selection {
+  border: 1px solid $gigas;
+  border-radius: 50px !important;
+
+  &:focus {
+    border-color: $gigas;
+  }
+}
+
+.ant-selection-open, .ant-select-focused {
+  border-color: $gigas;
+}

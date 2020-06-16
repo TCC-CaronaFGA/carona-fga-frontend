@@ -7,17 +7,17 @@ class Ranking extends Component {
   data = [
     {
       key: "1",
-      name: "Thiago",
+      name: "1º - Thiago",
       qtdRides: 10,
     },
     {
       key: "2",
-      name: "Ana",
+      name: "2º - Ana",
       qtdRides: 8,
     },
     {
       key: "3",
-      name: "Gabriel",
+      name: "3º - Gabriel",
       qtdRides: 8,
     },
     {
