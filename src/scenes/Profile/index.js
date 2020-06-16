@@ -14,6 +14,7 @@ class Profile extends Component {
       redirect: false,
       cars: [],
       showCarForm: false,
+      rides: [],
     };
   }
 
@@ -66,9 +67,13 @@ class Profile extends Component {
               <Row>
                 <div className="profile-details">
                   <h2>
-                    Caronas oferecidas <Icon type="star" /> - Nível 1
+                    Caronas oferecidas <Icon type="star" />- Nível
+                    {this.state.rides.length > 2 ? " 2" : " 1"}
                   </h2>
-                  <h3>{this.props.user.points} caronas</h3>
+                  <h3>
+                    {this.state.rides.length}
+                    {this.state.rides.length === 1 ? " carona" : " caronas"}
+                  </h3>
                 </div>
               </Row>
             </Col>
@@ -85,7 +90,7 @@ class Profile extends Component {
                       </h4>
                     </li>
                   ))}
-                  {this.state.cars === 0 && (
+                  {this.state.cars.length === 0 && (
                     <h5>
                       Adicione um carro ao seu perfil para oferecer caronas.
                     </h5>

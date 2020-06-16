@@ -10,6 +10,7 @@ import CarForm from "../../scenes/CarForm";
 import Profile from "../../scenes/Profile";
 import Ranking from "../../scenes/Ranking";
 import Solicitations from "../../scenes/Solicitations";
+import Evaluation from "../../scenes/Evaluation";
 
 //Data Imports
 
@@ -27,6 +28,7 @@ class Routes extends Component {
       component: (props) => <Solicitations {...props} />,
     },
     { path: "/ranking", component: (props) => <Ranking {...props} /> },
+    { path: "/evaluations", component: (props) => <Evaluation {...props} /> },
   ];
   render() {
     return (

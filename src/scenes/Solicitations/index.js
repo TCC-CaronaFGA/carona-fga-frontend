@@ -74,7 +74,7 @@ class Solicitations extends Component {
                     </Col>
                     <Col span={6}>
                       <div className="vagas-disponiveis">
-                        <h4>VAGAS</h4>
+                        <h4>Vagas Solicitadas</h4>
                         <h3>{item.requestedSeats}</h3>
                       </div>
                     </Col>
@@ -146,7 +146,7 @@ class Solicitations extends Component {
                     <Col span={6}>
                       <div className="vagas-disponiveis">
                         <h4>VAGAS SOLICITADAS</h4>
-                        <h3>{item.requestedSeats}</h3>
+                        <h3>{item.request.data.requestedSeats}</h3>
                       </div>
                     </Col>
                     <Col span={24}>
