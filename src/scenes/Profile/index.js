@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import CarForm from "../CarForm";
 import "./styles.scss";
 import Axios from "axios";
-import { carRoute, userRidesRoute } from "../../constants/apiRoutes";
+import { carRoute } from "../../constants/apiRoutes";
 
 class Profile extends Component {
   constructor(props) {
@@ -27,15 +27,6 @@ class Profile extends Component {
       })
       .catch(() => {
         notification.open({ message: "Falha ao recuperar lista de carros" });
-      });
-    Axios.get(userRidesRoute)
-      .then((response) => {
-        if (response.status === 200) {
-          this.setState({ rides: response.data.data });
-        }
-      })
-      .catch(() => {
-        notification.open({ message: "Falha ao recuperar lista de caronas" });
       });
   }
 

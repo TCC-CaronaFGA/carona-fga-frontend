@@ -48,7 +48,7 @@ class RideForm extends Component {
     });
   }
 
-  addressFGA = "Universidade de Brasília - Gama, Gama Leste, Brasília";
+  addressFGA = "Universidade de Brasília - Campus Gama (FGA)";
 
   LOCATIONS = [
     "Ceilândia",
