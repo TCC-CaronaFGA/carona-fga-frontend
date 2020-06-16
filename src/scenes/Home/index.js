@@ -11,8 +11,10 @@ class Home extends Component {
           <div className="spin">
             <Spin tip="Carregando..." />
           </div>
+        ) : this.props.user.gender === "M" ? (
+          <h1>Bem vindo, {this.props.user.name} :)</h1>
         ) : (
-          <h1>Bem vindo(a), {this.props.user.name} :)</h1>
+          <h1>Bem vinda, {this.props.user.name} :)</h1>
         )}
       </div>
     );

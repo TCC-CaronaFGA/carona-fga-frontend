@@ -42,7 +42,11 @@ class Profile extends Component {
           </div>
         ) : (
           <>
-            <h1>Bem vindo(a), {this.props.user.name} :)</h1>
+            {this.props.user.gender === "M" ? (
+              <h1>Bem vindo, {this.props.user.name} :)</h1>
+            ) : (
+              <h1>Bem vinda, {this.props.user.name} :)</h1>
+            )}
             <Col span={8}>
               <Row>
                 <div className="profile-details info">
@@ -62,7 +66,7 @@ class Profile extends Component {
               <Row>
                 <div className="profile-details">
                   <h2>
-                    Caronas oferecidas <Icon type="star" />
+                    Caronas oferecidas <Icon type="star" /> - Nível 1
                   </h2>
                   <h3>{this.props.user.points} caronas</h3>
                 </div>
