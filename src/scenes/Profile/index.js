@@ -28,6 +28,15 @@ class Profile extends Component {
       .catch(() => {
         notification.open({ message: "Falha ao recuperar lista de carros" });
       });
+    Axios.get(userRidesRoute)
+      .then((response) => {
+        if (response.status === 200) {
+          this.setState({ rides: response.data.data });
+        }
+      })
+      .catch(() => {
+        notification.open({ message: "Falha ao recuperar lista de caronas" });
+      });
   }
 
   showCarForm = () => {
