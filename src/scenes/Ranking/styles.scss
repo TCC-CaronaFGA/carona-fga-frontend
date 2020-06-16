@@ -1,31 +1,60 @@
 
 @import "../../shared/LayoutApp/styles.scss";
 
-.ant-table-wrapper {
-	padding: 5% 20%;
-	.ant-table-tbody > tr {
-		background-color: $comet;
-		color: $alto;
+// .ant-table-wrapper {
+// 	padding: 5% 20%;
+// 	.ant-table-tbody > tr {
+// 		background-color: $comet;
+// 		color: $alto;
 	
-		&:hover {
-			background-color: $comet;
-		}
-	}
-	.ant-table-thead > tr > th .ant-table-column-sorter .ant-table-column-sorter-inner .ant-table-column-sorter-up.on, 
-	.ant-table-thead > tr > th .ant-table-column-sorter .ant-table-column-sorter-inner .ant-table-column-sorter-down.on,
-	.ant-table-thead > tr > th .ant-table-column-sorter .ant-table-column-sorter-inner {
-		color: transparent;
-	}
+// 		&:hover {
+// 			background-color: $comet;
+// 		}
+// 	}
+// 	.ant-table-thead > tr > th .ant-table-column-sorter .ant-table-column-sorter-inner .ant-table-column-sorter-up.on, 
+// 	.ant-table-thead > tr > th .ant-table-column-sorter .ant-table-column-sorter-inner .ant-table-column-sorter-down.on,
+// 	.ant-table-thead > tr > th .ant-table-column-sorter .ant-table-column-sorter-inner {
+// 		color: transparent;
+// 	}
 
-}
-.ant-table-wrapper.ant-table-tbody > tr:hover {
-	background-color: red !important;
-	color: $ebony;
-}
+// }
+// .ant-table-wrapper.ant-table-tbody > tr:hover {
+// 	//background-color: red !important;
+// 	color: $ebony;
+// }
 
-.ant-table-thead > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td,
-.ant-table-tbody > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td,
-.ant-table-thead > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td,
-.ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td {
-  background: transparent !important;
+// .ant-table-thead > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td,
+// .ant-table-tbody > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td,
+// .ant-table-thead > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td,
+// .ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td {
+//   background: transparent !important;
+// }
+
+.ranking {
+	margin-top: 80px;
+
+	.item-ranking, .ant-list-item-meta, li {
+		min-height: 0rem !important;
+	}
+	.ant-list-item {
+		border-radius: 50px !important;
+		max-width: 30vw;
+		margin-bottom: 8px !important;
+	}
+	.ant-list-item-meta-content {
+		justify-content: space-around;
+		display: flex;
+	}
+	.ant-list-item-meta {
+		padding: 12px;
+    	margin: 0;
+	}
+	h4.ant-list-item-meta-title {
+		margin: 0 !important;
+		font-size: 22px !important;
+	}
+	.ant-list-item-meta-description h4{
+		color: $alert !important;
+		font-size: 22px !important;
+	}
 }

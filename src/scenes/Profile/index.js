@@ -64,7 +64,7 @@ class Profile extends Component {
                   <h2>
                     Caronas oferecidas <Icon type="star" />
                   </h2>
-                  <h3>5 caronas</h3>
+                  <h3>{this.props.user.points} caronas</h3>
                 </div>
               </Row>
             </Col>
